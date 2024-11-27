@@ -1,0 +1,107 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    height: 100vh; /* Full viewport height */
+    background: linear-gradient(135deg, #ffffff, #ffffff); /* Elegant bluish gradient */
+    font-family: "Arial", sans-serif;
+  }
+  
+  .logoContainer {
+    text-align: center; /* Center align the text and logo */
+    margin-bottom: 40px; /* Space below the logo section */
+    animation: fadeInLogo 1.5s ease-out; /* Smooth fade-in animation */
+  }
+  
+  .tagline {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0e0a38; /* Bluish color for the tagline */
+    margin-bottom: -90px; /* Space between tagline and logo */
+    margin-left: -180px;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    
+  }
+  
+  .registerButton {
+    background-color: #030839; /* Bluish button */
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px; /* Add spacing below the button */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover and movement transitions */
+    animation: slideUpButton 1s ease-out 0.5s; /* Smooth slide-up animation with delay */
+    animation-fill-mode: both; /* Keeps final state after animation */
+  }
+  
+  .registerButton:hover {
+    background-color: #1565c0; /* Darker shade on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
+  }
+  
+  .footerLinks {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Add space between the text items */
+    font-size: 14px;
+    color: #333;
+    opacity: 0; /* Initially hidden */
+    animation: fadeInFooter 1.5s ease-out 1s; /* Fade in after delay */
+    animation-fill-mode: both; /* Keeps final state after animation */
+  }
+  
+  .footerLinks span {
+    color: #444;
+  }
+  
+  .footerLinks b {
+    color: #000;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .footerLinks b:hover {
+    color: #1e88e5; /* Matches the button color */
+  }
+  
+  /* Keyframe Animations */
+  @keyframes fadeInLogo {
+    from {
+      opacity: 0;
+      transform: scale(0.8); /* Start smaller */
+    }
+    to {
+      opacity: 1;
+      transform: scale(1); /* Final size */
+    }
+  }
+  
+  @keyframes slideUpButton {
+    from {
+      opacity: 0;
+      transform: translateY(20px); /* Start below */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* Slide to position */
+    }
+  }
+  
+  @keyframes fadeInFooter {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
