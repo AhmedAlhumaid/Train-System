@@ -2,6 +2,7 @@
 import React from "react";
 import styles from  "../assets/styles/home.module.css"; 
 import logo from "../assets/images/logo.png";
+import {Link} from "react-router-dom";
 function Home(){
     return (
         <div className={styles.container}>
@@ -12,7 +13,10 @@ function Home(){
           </div>
     
           {/* Register Button */}
+          <Link to = "/register" style={{ textDecoration: 'none' }}>
           <button className={styles.registerButton}>REGISTER</button>
+          </Link>
+          
     
           {/* Footer Links */}
           <div className={styles.footerLinks}>
