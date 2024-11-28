@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
-const userSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    type:{type:String,required:true},
-    phoneNum:{type:String, required:true}
-  });
-  
+
+// MongoDB connection string
+const uri = 'mongodb+srv://humaidakah:kahkah@swe363-db.eachi.mongodb.net/Train-System?retryWrites=true&w=majority';
+
+// Connect to MongoDB
+const connectDB = async () => {
+  try {
+    await mongoose.connect(uri);
+    console.log('Connected to Train-System database');
+  } catch (err) {
+    console.error('Error connecting to MongoDB:', err.message);
+    process.exit(1); // Exit the process with failure
+  }
+};
+
+module.exports = connectDB;

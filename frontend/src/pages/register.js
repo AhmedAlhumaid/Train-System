@@ -21,6 +21,7 @@ function Register(){
     const[validEmail,setValidEmail] = useState(false);
     const[validPassword,setValidPassword]= useState(false);
     const[validPhoneNum,setValidPhoneNum] = useState(false);
+    const [error, setError] = useState(""); // To display error messages
     const navigate = useNavigate();
 
     function onFirstNameChange(e){
@@ -79,13 +80,36 @@ function Register(){
     function onToggleVisibilty(){
         setVisible(!visible);
     }
-    function handleSubmit(){
+   async function handleSubmit(){
+    const type = "normal"
      if(!validEmail||!validPassword||!validPhoneNum){
         console.log("check your credentials")
      }
+
      else{
-        navigate("/"); // Correctly navigate to the home page
-     }
+      try{
+        const response  = await fetch("http://localhost:5000/api/users/register",{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({fName,lName,email,password,phoneNum,type})
+        });
+
+        if(!response.ok){
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to register");
+        }
+        const data = await response.json()
+        console.log("registered successfully ", data)
+        navigate("/")
+      }
+      catch(err){
+        console.error("Error in registering:", err.message);
+        setError(err.message); // Display error to the user
+      }
+       
+     }  
     }
   return (
     <div className={styles.container}>
@@ -115,7 +139,6 @@ function Register(){
           className={styles.input}
           onChange={onFirstNameChange}
           value={fName}
-          required
         />
       </div>
       <div className={styles.inputField}>
@@ -126,7 +149,7 @@ function Register(){
           className={styles.input}
           onChange={onLastNameChange}
           value={lName}
-          required
+
         />
       </div>
       <div className={styles.inputField}>
@@ -137,7 +160,6 @@ function Register(){
           className={styles.input}
           onChange={onEmailChange}
           value={email}
-          required
         />
       </div>
       <div className={styles.inputField}>
@@ -148,7 +170,7 @@ function Register(){
           className={styles.input}
           onChange={onPhoneNumChange}
           value={phoneNum}
-          required
+
         />
       </div>
       <div className={styles.inputField}>
@@ -158,9 +180,7 @@ function Register(){
           placeholder="Password"
           className={styles.input}
           onChange={onPasswordChange}
-          
           value={password}
-          required
         />
         <img src={eyeIcon} alt="Show Password" className={styles.eyeIcon}
         onClick={onToggleVisibilty}
@@ -174,16 +194,17 @@ function Register(){
           className={styles.input}
           value={confirmedPassword}
           onChange={onConfirmingChange}
-          required
         />
-        <img src={eyeIcon} alt="Show Password" className={styles.eyeIcon} />
+        <img src={eyeIcon} alt="Show Password" className={styles.eyeIcon} 
+        onClick={onToggleVisibilty}
+        />
       </div>
       <div className={styles.footerLinks}>
             <span>
               Already have an account? <b>Log In</b>
             </span>
           </div>
-
+    {error && <p className={styles.errorMessage}>{error}</p>} {/* Display error message */}
       {/* Submit Button */}
       <button className={styles.createButton}
        onClick={handleSubmit}

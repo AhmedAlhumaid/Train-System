@@ -99,6 +99,19 @@
     color: #1e88e5; /* Matches the button color */
   }
   
+  .errorMessage {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center; /* Center aligns the error message */
+    background-color: #ffe6e6; /* Light red background for visibility */
+    border: 1px solid #ff4d4d; /* Red border */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
+    width: 30%; /* Optional: Adjust width to fit the design */
+    margin: 0 auto; /* Center horizontally */
+  }
 
   @keyframes slideIn {
     from {

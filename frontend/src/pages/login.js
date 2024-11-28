@@ -9,6 +9,7 @@ import lockIcon from "../assets/images/lock-icon.png";
 function Login(){
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const [error, setError] = useState(""); // To display error messages
     function onEmailChange(e){
         setEmail(e.target.value);
     }
@@ -16,8 +17,29 @@ function Login(){
         setPassword(e.target.value)
     }
 
-    function handleSubmit(){
-
+    async function handleSubmit(){
+        try {
+            const response = await fetch("api/users/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            });
+            console.log(response);
+            if (!response.ok) {
+              const errorData = await response.json();
+              throw new Error(errorData.error || "Failed to login");
+            }
+      
+            const data = await response.json();
+            console.log("Login successful:", data);
+            setError("")
+            // Handle successful login here (e.g., redirect, save token, etc.)
+          } catch (err) {
+            console.error("Error logging in:", err.message);
+            setError(err.message); // Display error to the user
+          }
     }
     return(
 
@@ -55,6 +77,7 @@ function Login(){
                 required
                 />
          </div>
+         {error && <p className={styles.errorMessage}>{error}</p>} {/* Display error message */}
          <div className={styles.footerLinks}>
             <span>
               don't have an account? <Link to = "/register"><b>Register</b></Link>
