@@ -1,0 +1,143 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  .logoContainer {
+    text-align: center; /* Center align the text and logo */
+    margin-bottom: 40px; /* Space below the logo section */
+    animation: fadeInLogo 1.5s ease-out; /* Smooth fade-in animation */
+  }
+  .tagline {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0d0478; /* Bluish color for the tagline */
+    margin-bottom: -80px; /* Space between tagline and logo */
+    margin-left: -180px;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  .backButton {
+    align-self: flex-start;
+    margin-bottom: -20px;
+    cursor: pointer;
+    animation: slideIn 1s ease-out; /* Smooth slide-in animation */
+  }
+  
+  .backButton img {
+    margin-top: -25px;
+    width: 80px;
+    height: 80px;
+  }
+  .inputField {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    animation: fadeInInputs 1s ease-out;
+  }
+  .input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  .createButton {
+    background-color: #1e3a8a;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    animation: bounceButton 1.5s ease-in-out infinite alternate; /* Bounce animation */
+  }
+  
+  .createButton:hover {
+    background-color: #1565c0;
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+
+  .footerLinks span {
+    color: #444;
+  }
+  
+  .footerLinks b {
+    color: #000;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .footerLinks b:hover {
+    color: #1e88e5; /* Matches the button color */
+  }
+  
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50px); /* Slide in from the left */
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0); /* End at original position */
+    }
+  }
+
+  @keyframes fadeInInputs {
+    from {
+      opacity: 0;
+      transform: translateY(20px); /* Slide in from below */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* End at original position */
+    }
+  }
+
+  @keyframes bounceButton {
+    from {
+      transform: translateY(0); /* Original position */
+    }
+    to {
+      transform: translateY(-10px); /* Slightly lift up */
+    }
+  }
+
+  @keyframes fadeInLogo {
+    from {
+      opacity: 0;
+      transform: scale(0.8); /* Start smaller */
+    }
+    to {
+      opacity: 1;
+      transform: scale(1); /* End at full size */
+    }
+  }
