@@ -10,6 +10,7 @@ function Login(){
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [error, setError] = useState(""); // To display error messages
+    const navigate = useNavigate();
     function onEmailChange(e){
         setEmail(e.target.value);
     }
@@ -34,7 +35,10 @@ function Login(){
       
             const data = await response.json();
             console.log("Login successful:", data);
+            console.log(data.token)
+            localStorage.setItem("token",data.token); //store the token on the browser for future api requests
             setError("")
+            navigate("/main")
             // Handle successful login here (e.g., redirect, save token, etc.)
           } catch (err) {
             console.error("Error logging in:", err.message);
