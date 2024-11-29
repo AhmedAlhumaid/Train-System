@@ -6,6 +6,8 @@ import trainCardIcon from "../assets/images/trainTickt.png"; // Train ticket ima
 import backIcon from "../assets/images/back-icon.png"; // Back button icon
 import calendarIcon from "../assets/images/ticktCalendar.png"; // Calendar icon
 import passengerIcon from "../assets/images/user-icon.png"; // Passenger icon
+import {Link} from "react-router-dom";
+
 
 function TrainsList() {
   const location = useLocation();
@@ -49,10 +51,12 @@ function TrainsList() {
   return (
     <div className={styles.resultsContainer}>
       {/* Back Button */}
-      <button className={styles.backButton} onClick={() => window.history.back()}>
-        <img src={backIcon} alt="Back" />
-      </button>
-
+      <div className={styles.backButton}>
+            <Link to = "/main">
+             <img src={backIcon} alt="Back" />
+            </Link>
+        
+            </div>
       {/* Page Header */}
       <h2 className={styles.pageHeader}>Select Your Train</h2>
 

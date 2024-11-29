@@ -13,24 +13,18 @@
 
 /* Back Button */
 .backButton {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  background-color: #26457c;
-  border-radius: 10px;
-  width: 60px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e8ecf4;
+  align-self: flex-start;
+  margin-bottom: -20px;
   cursor: pointer;
+  animation: slideIn 1s ease-out; /* Smooth slide-in animation */
 }
 
 .backButton img {
-  width: 20px;
-  height: 20px;
+  margin-top: -25px;
+  width: 80px;
+  height: 80px;
 }
+
 
 /* Header */
 .pageHeader {

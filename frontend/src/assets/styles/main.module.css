@@ -20,8 +20,9 @@
     width: 80px;
     height: 80px;
   }
-  .logoContainer {
 
+  
+  .logoContainer {
     text-align: center; /* Center align the text and logo */
     margin-top: 30px;
     animation: fadeInLogo 1.5s ease-out; /* Smooth fade-in animation */
