@@ -102,7 +102,7 @@ function Register(){
         }
         const data = await response.json()
         console.log("registered successfully ", data)
-        navigate("/")
+        navigate("/login")
       }
       catch(err){
         console.error("Error in registering:", err.message);
@@ -201,7 +201,7 @@ function Register(){
       </div>
       <div className={styles.footerLinks}>
             <span>
-              Already have an account? <b>Log In</b>
+              Already have an account? <Link to = "/login"><b>Log In</b></Link>
             </span>
           </div>
     {error && <p className={styles.errorMessage}>{error}</p>} {/* Display error message */}
