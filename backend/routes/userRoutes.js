@@ -58,6 +58,7 @@ router.post('/register', async (req, res) => {
     }
   });
 
+  //fetch the info of a user
   router.get("/info",async(req,res)=>{
     console.log("got request")
     console.log(req.headers)

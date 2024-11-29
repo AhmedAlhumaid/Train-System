@@ -8,12 +8,26 @@
     font-family: Arial, sans-serif;
     padding: 20px;
   }
+  .backButton {
+    align-self: flex-start;
+    margin-bottom: -20px;
+    cursor: pointer;
+    animation: slideIn 1s ease-out; /* Smooth slide-in animation */
+  }
+  
+  .backButton img {
+    margin-top: -25px;
+    width: 80px;
+    height: 80px;
+  }
   .logoContainer {
+
     text-align: center; /* Center align the text and logo */
     margin-top: 30px;
     animation: fadeInLogo 1.5s ease-out; /* Smooth fade-in animation */
   }
   .tagline {
+    box-shadow: #0d0478;
     display: block;
     font-size: 18px;
     font-weight: bold;
