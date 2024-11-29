@@ -46,7 +46,6 @@ router.post('/register', async (req, res) => {
       }
       const payload = {
         userId: user._id,
-        email: user.email,
       };
       const token = jwt.encode(payload,SECRET_KEY); //generate a string token for the user
       

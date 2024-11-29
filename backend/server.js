@@ -8,7 +8,6 @@ const PORT = 5000; // specify the port
 // connect to the database
 app.use(express.json()); // parsing the json before the routing
 app.use(cors()); // Enable CORS
-
 connectDB();
 app.use('/api/users', userRoutes);
 app.listen(PORT, () => {
