@@ -3,59 +3,78 @@ import styles from "../assets/styles/train_selector.module.css";
 import trainRightIcon from "../assets/images/train-right.png";
 import trainLeftIcon from "../assets/images/train-left.png";
 import calendarIcon from "../assets/images/calendar.png";
+import { useNavigate } from "react-router-dom"; // Import for navigation
 
 function TrainSelector() {
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
     const [departureDate, setDepartureDate] = useState("");
     const [travelers, setTravelers] = useState("1");
+    const navigate = useNavigate();
+
   
-    const stations = ["1", "2", "3", "4"];
+    const stations =  [
+      "Jeddah",
+      "Riyadh",
+      "Khobar",
+      "Makkah",
+      "Najran",
+      "Dammam",
+      "Abha",
+      "Madina",
+    ];
     const travelerOptions = [1, 2, 3]; // Maximum number of passengers
   
     const handleSearch = () => {
-      alert(`Searching trains from ${from} to ${to} on ${departureDate} for ${travelers} traveler(s).`);
+      //alert(`Searching trains from ${from} to ${to} on ${departureDate} for ${travelers} traveler(s).`);
+      navigate("/trains", { state: { from, to, departureDate, travelers } });
     };
   
     return (
     <div className={styles.trainSelector}>
       {/* From Field */}
       <div className={styles.field}>
-        <div className={styles.labelContainer}>
-          <label>From</label>
-          <img src={trainRightIcon} alt="Train Right Icon" className={styles.icon} />
-        </div>
-        <select
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
-          className={styles.input}
-        >
-          <option value="" disabled>
-            Select Origin
+      <div className={styles.labelContainer}>
+        <label>From</label>
+        <img
+          src={trainRightIcon}
+          alt="Train Right Icon"
+          className={styles.icon}
+        />
+      </div>
+      <select
+        value={from}
+        onChange={(e) => setFrom(e.target.value)}
+        className={styles.input}
+      >
+        <option value="" disabled>
+          Select Origin
+        </option>
+        {stations.map((station, index) => (
+          <option key={index} value={station}>
+            {station}
           </option>
-          {stations.map((station, index) => (
-            <option key={index} value={station}>
-              {station}
-            </option>
-          ))}
+        ))}
         </select>
       </div>
 
       {/* To Field */}
       <div className={styles.field}>
-        <div className={styles.labelContainer}>
-          <label>To</label>
-          <img src={trainLeftIcon} alt="Train Left Icon" className={styles.icon} />
-        </div>
-        <select
-          value={to}
-          onChange={(e) => setTo(e.target.value)}
-          className={styles.input}
-        >
-          <option value="" disabled>
-            Select Destination
-          </option>
-          {stations.map((station, index) => (
+      <div className={styles.labelContainer}>
+        <label>To</label>
+        <img src={trainLeftIcon} alt="Train Left Icon" className={styles.icon} />
+      </div>
+      <select
+        value={to}
+        onChange={(e) => setTo(e.target.value)}
+        className={styles.input}
+      >
+        <option value="" disabled>
+          Select Destination
+        </option>
+        {stations
+          .filter((station) => station !== from) // Exclude the selected "From" station
+          .map((station, index) => (
             <option key={index} value={station}>
               {station}
             </option>
@@ -94,7 +113,7 @@ function TrainSelector() {
       </div>
 
       {/* Search Button */}
-      <button className={styles.searchButton}>Search Trains</button>
+      <button className={styles.searchButton} onClick={handleSearch}>Search Trains</button>
     </div>
   );
   }

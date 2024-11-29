@@ -1,0 +1,265 @@
+/* Container */
+.resultsContainer {
+  padding: 15px;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+
+  /* Linear Gradient Background */
+  background: linear-gradient(180deg, #FFFFFF 0%, #26457C 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Back Button */
+.backButton {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background-color: #26457c;
+  border-radius: 10px;
+  width: 60px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e8ecf4;
+  cursor: pointer;
+}
+
+.backButton img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Header */
+.pageHeader {
+  font-size: 34px;
+  font-weight: bold;
+  color: #26457c;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Journey Summary */
+.journeySummary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px auto;
+  position: relative;
+}
+
+/* Station Circle */
+.stationCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 50px;
+  background-color: #ffffff;
+  border: 2px solid #26457c;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #26457c;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+/* Train Icon */
+.trainTopIcon {
+  width: 150px;
+  height: auto;
+  position: relative;
+  z-index: 0;
+}
+
+/* Dashed Line */
+.dashedLine {
+  position: absolute;
+  width: 200px;
+  height: 2px;
+  margin: 13px;
+  background: #26457c;
+  border-width: 0 0 2px 0;
+  border-style: dashed;
+  border-color: #26457c;
+  top: 50%;
+  z-index: 0;
+  transform: translateY(-50%);
+}
+
+/* Date and Passengers */
+.datePassengers {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+  color: #26457c;
+}
+
+.date,
+.passengers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  background-color: #f8f9fa;
+  padding: 6px 10px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.date img,
+.passengers img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Class Quota */
+.classQuota {
+  margin: 10px auto;
+  width: 70%;
+  padding: 8px 0;
+  background-color: #26457c;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* Train List */
+.trainList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 85%; /* Slightly narrower for a compact look */
+  margin: 0 auto;
+}
+
+/* Train Card */
+.trainCard {
+  background: linear-gradient(to right, #f9f9f9, #f1f1f1);
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  animation: fadeIn 0.5s ease;
+  padding: 20px;
+}
+
+.trainCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Ticket Shape (Left and Right Cuts) */
+.ticketCutLeft,
+.ticketCutRight {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 50px;
+  background:#26457C;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.ticketCutLeft {
+  left: -9px;
+}
+
+.ticketCutRight {
+  right: -9px;
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #26457c;
+  font-weight: bold;
+}
+
+.departureTime,
+.arrivalTime {
+  color: #e63946;
+  font-size: 14px;
+}
+
+.stationCode {
+  text-transform: uppercase;
+  color: #26457c;
+}
+
+.trainDurationContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.clockIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Train Image */
+.trainImageContainer {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.trainCardIcon {
+  width: auto;
+  max-height: 70px; /* Reduced for a compact design */
+  object-fit: contain;
+}
+
+/* Card Footer */
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.trainName {
+  font-size: 14px;
+  color: #2a9d8f;
+  font-weight: bold;
+}
+
+.trainPrice {
+  font-size: 16px;
+  color: #e63946;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Background Gradient for Card */
+.trainCard {
+  background: linear-gradient(135deg, #fdfbfb, #f2f2f2);
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+}
