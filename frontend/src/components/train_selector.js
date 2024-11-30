@@ -14,14 +14,7 @@ function TrainSelector() {
 
   
     const stations =  [
-      "Jeddah",
-      "Riyadh",
-      "Khobar",
-      "Makkah",
-      "Najran",
-      "Dammam",
-      "Abha",
-      "Madina",
+    "1","2","3","4"
     ];
     const travelerOptions = [1, 2, 3]; // Maximum number of passengers
   
