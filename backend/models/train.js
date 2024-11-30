@@ -54,7 +54,7 @@ const TrainSchema = new mongoose.Schema({
     uppercase: true,
   },
   date: {
-    type: Date,
+    type: String,
     required: true,
   },
   driver: {

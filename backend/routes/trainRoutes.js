@@ -5,7 +5,11 @@ const router = express.Router();
 // Get trains based on search criteria
 router.get('/', async (req, res) => {
   try {
-    const { from, to, tdate } = req.query;
+    const { from, to, date } = req.query;
+    
+    // Convert 'date' from 'yyyy-mm-dd' to 'yyyymmdd'
+    const formattedDate = date.replace(/-/g, '');
+    
 
     if (!from || !to ) {
       return res.status(400).json({ error: 'From, To, and Quota fields are required' });
@@ -14,6 +18,7 @@ router.get('/', async (req, res) => {
     const trains = await Train.find({
       from: new RegExp(`^${from}$`, 'i'),
       to: new RegExp(`^${to}$`, 'i'),
+      date:formattedDate,
     });
 
     if (trains.length === 0) {

@@ -27,7 +27,7 @@ function TrainsList() {
     const fetchTrains = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/trains?from=${from}&to=${to}&quota=General`
+          `http://localhost:5000/api/trains?from=${from}&to=${to}&date=${departureDate}`
         );
 
         if (!response.ok) {
@@ -86,9 +86,9 @@ function TrainsList() {
 
       {/* Train Tickets */}
       <div className={styles.trainList}>
-  {trains.length > 0 ? (
-    trains.map((train) => (
-      <div
+       {trains.length > 0 ? (
+       trains.map((train) => (
+       <div
         key={train._id}
         className={styles.trainCard}
         onClick={() => handleSelectTrain(train)}
