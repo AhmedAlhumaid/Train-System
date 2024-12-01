@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  .logoContainer {
+    position: absolute;
+    text-align: center; /* Center align the text and logo */
+    margin-bottom: 30%; /* Space below the logo section */
+    animation: fadeInLogo 1.5s ease-out; /* Smooth fade-in animation */
+  }
+  
+  .tagline {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0d0478; /* Bluish color for the tagline */
+    margin-bottom: -80px; /* Space between tagline and logo */
+    margin-left: -180px;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    
+  }
+
+.backButton {
+    position: absolute; /* Position it absolutely within the container */
+    top: 20px; /* Adjust the distance from the top */
+    left: 20px; /* Adjust the distance from the left */
+    cursor: pointer;
+    animation: slideIn 1s ease-out; /* Smooth slide-in animation */
+}
+
+.backButton img {
+    width: 80px; /* Adjust button size */
+    height: 80px;
+}
+

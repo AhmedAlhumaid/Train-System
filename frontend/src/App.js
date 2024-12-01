@@ -7,6 +7,7 @@ import Login from './pages/login';
 import Trains from "./pages/trains";
 import Seats from './pages/seats';
 import Payment from './pages/payment';
+import Booking from './pages/booking';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         <Route path = "/trains" element = {<Trains></Trains>} ></Route>
         <Route path = "/seats" element={<Seats></Seats>}></Route>
         <Route path="/payment" element= {<Payment></Payment>}></Route>
-
+        <Route path = "booking" element = {<Booking></Booking>}></Route>
         </Routes>
       </Router>
     </div>
