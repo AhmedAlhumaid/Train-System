@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from './pages/login';
 import Trains from "./pages/trains";
 import Seats from './pages/seats';
+import Payment from './pages/payment';
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <Route path = "/login" element = {<Login></Login>}></Route>
         <Route path = "/main" element = {<Main></Main>} ></Route>
         <Route path = "/trains" element = {<Trains></Trains>} ></Route>
-        <Route path = "seats" element={<Seats></Seats>}></Route>
+        <Route path = "/seats" element={<Seats></Seats>}></Route>
+        <Route path="/payment" element= {<Payment></Payment>}></Route>
 
         </Routes>
       </Router>
