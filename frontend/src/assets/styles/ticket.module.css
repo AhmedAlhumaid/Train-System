@@ -3,37 +3,41 @@
     justify-content: center;
     align-items: center;
     margin: 30px auto;
-    
+    position: relative; /* Ensure the barcode is positioned relative to this container */
   }
-  .barcode{
-    position: absolute;
+  
+  .barcode {
+    position: absolute; /* Position relative to .ticketContainer */
     width: 180px;
     height: 180px;
-    margin-left: 35%;
-    margin-top: 7%;
+    top: 65%; /* Center vertically relative to .ticketContainer */
+    left: 75%; /* Center horizontally relative to .ticketContainer */
+    transform: translate(-50%, -50%); /* Offset by 50% to achieve perfect centering */
   }
+  
   .ticket {
     width: 95%;
     max-width: 1200px;
-    border-radius: 10px ;
+    border-radius: 10px;
     background: #6c21ad2f;
-    overflow: hidden; /* Ensure content stays inside the rounded corners */
+    overflow: hidden;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     font-family: Arial, sans-serif;
   }
   
   .pianoBlackHeader,
-  .pianoBlackFooter {
-    background-color: #000;
-    height: 30px; /* Height of the header and footer */
-  }
-  
-  .ticketContent {
-    display: flex;
-    border: 10px solid #ffd700;
-    border-top: none;
-    border-bottom: none;
-  }
+.pianoBlackFooter {
+  background-color: #333333; /* Sleek dark gray */
+  height: 30px;
+}
+
+.ticketContent {
+  display: flex;
+  border: 10px solid #e0e0e0; /* Light gray for a clean, modern look */
+  border-top: none;
+  border-bottom: none;
+  background-color: #ffffff; /* Pure white to make the content pop */
+}
   
   .leftSection {
     flex: 2;
