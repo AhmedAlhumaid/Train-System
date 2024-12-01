@@ -1,0 +1,136 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    position: relative; /* Ensure the container is the reference for positioning */
+}
+
+.backButton {
+    position: absolute; /* Position it absolutely within the container */
+    top: 20px; /* Adjust the distance from the top */
+    left: 20px; /* Adjust the distance from the left */
+    cursor: pointer;
+    animation: slideIn 1s ease-out; /* Smooth slide-in animation */
+}
+
+.backButton img {
+    width: 80px; /* Adjust button size */
+    height: 80px;
+}
+
+  .topImage {
+    position: absolute;
+    width: 100%;
+    max-width: 550px; /* Adjust as needed */
+    margin-bottom: 30%; /* Spacing between the image and other content */
+    margin-right: -2%;
+    
+}
+.animatedLetter {
+    opacity: 0; /* Start invisible */
+    display: inline-block;
+    animation: fadeIn 0.5s ease-in-out forwards; /* Animation to fade in */
+}
+.h1{
+    position: absolute;
+    font-size: xx-large;
+    font-style: italic;
+    font-weight: bolder;
+    margin-top: -2.5%;
+}
+
+.legend{
+    position: absolute;
+    margin-right: 85%;
+    margin-bottom: 25%;
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.legendRow {
+    display: flex;
+    align-items: center; /* Align dot and label vertically */
+    gap: 10px; /* Add spacing between dot and label */
+    margin-top: 15px;
+}
+.span{
+    font-size: larger;
+    font-weight:200;
+    font-style: italic;
+    color: grey;
+}
+.blueDot {
+    height: 25px;
+    width: 25px;
+    background-color: #7450d9;
+    border-radius: 50%;
+  }
+.grayDot{
+    height: 25px;
+    width: 25px;
+    background-color: #5a5a5a;
+    border-radius: 50%;
+}
+.redDot {
+    height: 25px;
+    width: 25px;
+    background-color: #e63946; /* Red for selected in legend */
+    border-radius: 50%;
+}
+
+.seatsContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    margin-top:20%;
+}
+
+.seatColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add spacing between seats */
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none; /* Prevent text selection on click */
+}
+
+.available {
+    background-color: #7450d9; /* Blue for available seats */
+}
+
+.reserved {
+    background-color: #5a5a5a; /* Gray for reserved seats */
+}
+
+.selected {
+    background-color: #e63946; /* Red for selected seats */
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px); /* Optional: Add a slide effect */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Return to original position */
+    }
+}
