@@ -18,8 +18,8 @@ function Seats() {
         9: "available",
         10: "available",
     });
+    
     const title = "Pick Your Seat!";
-
     // Handle seat click to toggle selection
     const handleSeatClick = (seatNumber) => {
         setSeats((prevSeats) => ({

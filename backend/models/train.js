@@ -68,6 +68,19 @@ const TrainSchema = new mongoose.Schema({
     min: [0, 'Current capacity must be a positive number'],
     max: [1000, 'Current capacity cannot exceed 1000'], 
   },
+  users: {
+    type: [String], // Array of strings
+    default: [], // Default to an empty array
+  },
+  seats: {
+    type: Map,
+    of: Boolean, // Boolean values to indicate availability
+    default: function () {
+      return new Map(
+        Array.from({ length: 10 }, (_, i) => [i + 1, true]) // Seats 1-10 default to available
+      );
+    },
+  },
 });
 
 module.exports = mongoose.model('Train', TrainSchema);
