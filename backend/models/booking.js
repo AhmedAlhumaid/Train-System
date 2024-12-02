@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const BookingSchema = new mongoose.Schema({
     userId: mongoose.Schema.Types.ObjectId,
     trainId: mongoose.Schema.Types.ObjectId,
+    from:String,
+    to:String,
     travelDate: Date,
-    quota: String,
-    price: Number,
-    passengers: Number,
+    price:Number,
+    seats:[String],
+    status:String,
   });
   
   module.exports = mongoose.model('Booking', BookingSchema);

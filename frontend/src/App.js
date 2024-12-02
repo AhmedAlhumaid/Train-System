@@ -22,7 +22,7 @@ function App() {
         <Route path = "/trains" element = {<Trains></Trains>} ></Route>
         <Route path = "/seats/:id" element={<Seats></Seats>}></Route>
         <Route path="/payment/:id" element= {<Payment></Payment>}></Route>
-        <Route path ="/booking:id" element = {<Booking></Booking>}></Route>
+        <Route path ="/booking" element = {<Booking></Booking>}></Route>
         </Routes>
       </Router>
     </div>
