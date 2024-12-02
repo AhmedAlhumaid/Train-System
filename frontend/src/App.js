@@ -8,6 +8,7 @@ import Trains from "./pages/trains";
 import Seats from './pages/seats';
 import Payment from './pages/payment';
 import Booking from './pages/booking';
+import Test from "./pages/test.js"
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path = "/seats" element={<Seats></Seats>}></Route>
         <Route path="/payment" element= {<Payment></Payment>}></Route>
         <Route path = "booking" element = {<Booking></Booking>}></Route>
+        <Route path = "/test" element = {<Test></Test>}></Route>
         </Routes>
       </Router>
     </div>
