@@ -3,10 +3,14 @@ import styles from "../assets/styles/seats.module.css";
 import backIcon from "../assets/images/back-icon.png";
 import seatsLogo from "../assets/images/seats.png";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Seats() {
     // Seat data with status
-    const [seats, setSeats] = useState({
+    const param = useParams(); // Extract parameters from the URL
+
+    console.log(param.id); 
+        const [seats, setSeats] = useState({
         1: "available",
         2: "available",
         3: "available",
