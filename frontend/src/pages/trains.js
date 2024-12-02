@@ -6,10 +6,12 @@ import trainCardIcon from "../assets/images/trainTickt.png"; // Train ticket ima
 import backIcon from "../assets/images/back-icon.png"; // Back button icon
 import calendarIcon from "../assets/images/ticktCalendar.png"; // Calendar icon
 import passengerIcon from "../assets/images/user-icon.png"; // Passenger icon
+import {useNavigate } from "react-router-dom";
 import {Link} from "react-router-dom";
 
 
 function TrainsList() {
+  const navigate = useNavigate();
   const location = useLocation();
   const { from, to, departureDate, travelers } = location.state;
 
@@ -45,7 +47,8 @@ function TrainsList() {
   }, [from, to]);
 
   const handleSelectTrain = (train) => {
-    alert(`You selected: ${train.name}`);
+    const id = train._id;
+    navigate(`/seats/${id}`); // Navigate to the seats page with the train ID
   };
 
   return (

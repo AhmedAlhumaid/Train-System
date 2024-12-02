@@ -6,12 +6,11 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const { from, to, date } = req.query;
+    console.log(from, to, date)
     
     // Convert 'date' from 'yyyy-mm-dd' to 'yyyymmdd'
     const formattedDate = date.replace(/-/g, '');
-    
-
-    if (!from || !to ) {
+    if (!from || !to || !date ) {
       return res.status(400).json({ error: 'From, To, and Quota fields are required' });
     }
 
