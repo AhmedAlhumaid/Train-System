@@ -4,13 +4,25 @@ import visaIcon from "../assets/images/visa-icon.png";
 import cardIcon from "../assets/images/card-icon.png";
 import logo from "../assets/images/logo.png";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation,useParams} from "react-router-dom";
 import { Link } from "react-router-dom";
 function Payment(){
+    const location = useLocation(); // Access the location object
+    console.log(location.state)
+    const { selectedSeats } = location.state || {};
+    console.log(selectedSeats)
+    // Extract selectedSeats from state
+    const {id} = useParams()
+    const navigate = useNavigate();
+
     const [cardNum,setCardNum] = useState("");
     const [name,setName] = useState("");
     const [expiryDate,setExpiryDate] = useState("")
     const [CVV,setCVV] = useState("");
+
+    function handleSumbit(){
+        navigate(`/booking/${id}`,{ state: { selectedSeats } })
+    }
     return(
         <div className={styles.container}>
              <div className={styles.logoContainer}>
@@ -69,7 +81,7 @@ function Payment(){
                     value={CVV}
                 />
             </div>
-            <button className={styles.payButton}
+            <button className={styles.payButton} onClick={handleSumbit}
                 >Pay!</button>
 
         </div>

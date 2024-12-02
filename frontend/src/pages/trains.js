@@ -29,7 +29,7 @@ function TrainsList() {
     const fetchTrains = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/trains?from=${from}&to=${to}&date=${departureDate}`
+          `http://localhost:5000/api/trains/trainList?from=${from}&to=${to}&date=${departureDate}`
         );
 
         if (!response.ok) {
