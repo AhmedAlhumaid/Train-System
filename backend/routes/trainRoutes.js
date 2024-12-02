@@ -3,7 +3,7 @@ const Train = require('../models/train');
 const router = express.Router();
 
 // Get trains based on search criteria
-router.get('/', async (req, res) => {
+router.get('/trainList', async (req, res) => {
   try {
     const { from, to, date } = req.query;
     console.log(from, to, date)
@@ -27,6 +27,18 @@ router.get('/', async (req, res) => {
     res.json(trains);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/train",async (req,res)=>{
+  try{
+    const {id} = req.query;
+    const train = await Train.findOne({"_id":id});
+    console.log(train)
+    res.status(200).json(train)
+  }
+  catch(err){
+    console.log(err)
   }
 });
 

@@ -4,9 +4,12 @@ import visaIcon from "../assets/images/visa-icon.png";
 import cardIcon from "../assets/images/card-icon.png";
 import logo from "../assets/images/logo.png";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation,useParams} from "react-router-dom";
 import { Link } from "react-router-dom";
 function Payment(){
+    const location = useLocation(); // Access the location object
+    const { selectedSeats } = location.state || {}; // Extract selectedSeats from state
+    const param = useParams()
     const [cardNum,setCardNum] = useState("");
     const [name,setName] = useState("");
     const [expiryDate,setExpiryDate] = useState("")

@@ -1,32 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../assets/styles/seats.module.css";
 import backIcon from "../assets/images/back-icon.png";
 import seatsLogo from "../assets/images/seats.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Seats() {
     // Seat data with status
-    const [seats, setSeats] = useState({
-        1: "available",
-        2: "available",
-        3: "available",
-        4: "available",
-        5: "available",
-        6: "available",
-        7: "available",
-        8: "available",
-        9: "available",
-        10: "available",
-    });
-    
+    const { id } = useParams(); // Extract train ID from the route
+    const [seats, setSeats] = useState({}); // Initialize seats as an empty object
+    const navigate = useNavigate();
+
+    // Fetch seating info from the database
+    useEffect(() => {
+        const fetchSeatingInfo = async () => {
+            try {
+                const response = await fetch(`/api/trains/train?id=${id}`);
+                const trainData = await response.json();
+                setSeats(trainData.seats); // Assume `trainData.seats` is an object like {1: true, 2: false}
+            } catch (err) {
+                console.error("Error fetching seating info:", err);
+            }
+        };
+        fetchSeatingInfo();
+    }, [id]); // Dependency array ensures fetchSeatingInfo runs only when `id` changes
+
     const title = "Pick Your Seat!";
+
     // Handle seat click to toggle selection
     const handleSeatClick = (seatNumber) => {
-        setSeats((prevSeats) => ({
-            ...prevSeats,
-            [seatNumber]: prevSeats[seatNumber] === "selected" ? "available" : "selected",
-        }));
+        setSeats((seats) => {
+            if (seats[seatNumber] === false) {
+                // If the seat is reserved, do nothing
+                return seats;
+            }
+
+            // Toggle "selected" status for available seats
+            return {
+                ...seats,
+                [seatNumber]: seats[seatNumber] === "selected" ? true : "selected",
+            };
+        });
     };
+
+    function handleSubmit(){
+        const selectedSeats = Object.keys(seats).filter(
+            (seatNumber) => seats[seatNumber] === "selected"
+        );
+        console.log(selectedSeats)
+        navigate(`/payment/${id}`, { state: { selectedSeats } });
+    }
 
     return (
         <div className={styles.container}>
@@ -51,15 +75,16 @@ function Seats() {
                 </div>
             </div>
             <h1 className={styles.h1}>
-                {title.split("").map((letter, index) => ( //wrapping each letter with a span to control the animation
-                       <span
-                       key={index}
-                       className={styles.animatedLetter}
-                       style={{ animationDelay: `${index * 0.1}s` }} >
-                       {letter === " " ? "\u00A0" : letter} 
-                   </span>
-                    ))}
-                </h1>
+                {title.split("").map((letter, index) => (
+                    <span
+                        key={index}
+                        className={styles.animatedLetter}
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                        {letter === " " ? "\u00A0" : letter}
+                    </span>
+                ))}
+            </h1>
             <div className={styles.seatsContainer}>
                 {/* Left side seats */}
                 <div className={styles.seatColumn}>
@@ -67,7 +92,7 @@ function Seats() {
                         <div
                             key={seatNumber}
                             className={`${styles.seat} ${
-                                seats[seatNumber] === "available"
+                                seats[seatNumber] === true
                                     ? styles.available
                                     : seats[seatNumber] === "selected"
                                     ? styles.selected
@@ -85,7 +110,7 @@ function Seats() {
                         <div
                             key={seatNumber}
                             className={`${styles.seat} ${
-                                seats[seatNumber] === "available"
+                                seats[seatNumber] === true
                                     ? styles.available
                                     : seats[seatNumber] === "selected"
                                     ? styles.selected
@@ -98,6 +123,9 @@ function Seats() {
                     ))}
                 </div>
             </div>
+            <button className={styles.payButton}
+            onClick = {handleSubmit}
+                >Checkout!</button>
         </div>
     );
 }
