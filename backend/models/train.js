@@ -72,7 +72,7 @@ const TrainSchema = new mongoose.Schema({
     type: [String], // Array of strings
     default: [], // Default to an empty array
   },
-  seats: {
+  seats: {   
     type: Map,
     of: Boolean, // Boolean values to indicate availability
     default: function () {
