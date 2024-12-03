@@ -3,7 +3,7 @@ import backIcon from "../assets/images/back-icon.png";
 import visaIcon from "../assets/images/visa-icon.png";
 import cardIcon from "../assets/images/card-icon.png";
 import logo from "../assets/images/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate,useLocation,useParams} from "react-router-dom";
 import { Link } from "react-router-dom";
 function Payment(){
@@ -14,14 +14,64 @@ function Payment(){
     // Extract selectedSeats from state
     const {id} = useParams()
     const navigate = useNavigate();
-
+    const [train, setTrain] = useState(null); // State for train data
     const [cardNum,setCardNum] = useState("");
     const [name,setName] = useState("");
     const [expiryDate,setExpiryDate] = useState("")
     const [CVV,setCVV] = useState("");
+    useEffect(() => {
+        console.log("Fetching train data...");
+        const fetchTrainInfo = async () => {
+            try {
+                const response = await fetch(`/api/trains/train?id=${id}`);
+                if (!response.ok) {
+                    setTrain(null);
+                
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                else{
+                    const trainData = await response.json();
+        
+                    setTrain(trainData); // Update state with fetched train data
+                }
+               
+            } catch (err) {
+                console.error("Error fetching train info:", err);
+            }
+        };
 
-    function handleSumbit(){
-        navigate(`/booking/${id}`,{ state: { selectedSeats } })
+        if (id) {
+            fetchTrainInfo();
+        }
+    }, [id]); // Dependency array ensures this effect only runs when `id` changes
+
+    async function handleSumbit(){
+        try{
+            const token = localStorage.getItem("token")
+            const response = await fetch("/api/bookings/newBooking",
+            {
+                method :"POST",
+                headers:{"x-auth":token,
+                        "Content-Type":"application/json"
+                },
+                body: JSON.stringify({"trainObject":train,"seats":selectedSeats})
+            }
+
+        );
+        if(!response.ok){
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Failed to pay");
+        }
+            navigate("/main")
+            alert("paid successfully")
+        }
+        catch(err){
+            console.error("Error??:", err.message);
+        }
+        
+
+       
+        // navigate(`/booking/${id}`,{ state: { selectedSeats } })
     }
     return(
         <div className={styles.container}>

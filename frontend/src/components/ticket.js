@@ -4,9 +4,11 @@ function Ticket(props){
   const seats = props.seats
   const train = props.train
   console.log(train);
-  const seatsString = Object.keys(seats).join(" ")
+  const seatsString = Object.values(seats).join(" ")
   const date = convertToRegularDate(train.date);
   console.log(date)
+  const token = localStorage.getItem("token")
+  console.log(token)
   function convertToRegularDate(yyyymmdd){
       // Extract year, month, and day from the yyyymmdd string
       const year = yyyymmdd.substring(0, 4);

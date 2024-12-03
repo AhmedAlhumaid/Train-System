@@ -17,7 +17,7 @@ app.use(cors());
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/trains', trainRoutes);
-
+app.use('/api/bookings',bookingRoutes)
 
 // Start the server
 app.listen(PORT, () => {

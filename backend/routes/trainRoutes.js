@@ -34,7 +34,10 @@ router.get("/train",async (req,res)=>{
   try{
     const {id} = req.query;
     const train = await Train.findOne({"_id":id});
-    console.log(train)
+    console.log("here in train");
+    if(!train){
+     return res.status(404).json({message:"no train with the given id is found"})
+    }
     res.status(200).json(train)
   }
   catch(err){

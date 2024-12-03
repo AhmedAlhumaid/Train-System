@@ -41,3 +41,10 @@
     height: 80px;
 }
 
+
+.oops{
+  font-size: xx-large;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+}
