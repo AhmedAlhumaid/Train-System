@@ -1,7 +1,9 @@
 const express = require('express');
 const Train = require('../models/train');
+const User = require("../models/user");
 const router = express.Router();
-
+const jwt = require("jwt-simple");
+const SECRET_KEY = "qs3h6z0JUN9wgTy1j2Cl54gB6yzG"
 // Get trains based on search criteria
 router.get('/trainList', async (req, res) => {
   try {
@@ -44,6 +46,29 @@ router.get("/train",async (req,res)=>{
   }
 });
 
+router.post("/addPassenger",async(req,res)=>{
+  try{
+    if (!req.headers["x-auth"]) {
+      return res.status(404).json({error: "Missing X-Auth header"});
+   }
+    const {trainID,selectedSeats} = req.body; 
+    const token = req.headers["x-auth"]
+    const decoded = jwt.decode(token,SECRET_KEY);
+    const user = await User.findOne({"_id":decoded.userId})
+    const train = await Train.findOne({"_id":trainID});
+    train.users.push(user.firstName);
+
+    for(const seat of selectedSeats){
+      train.seats.set(seat, false); 
+    }
+
+    await train.save();
+    return res.status(200).json({message:"train updated successfully"})
+  }
+  catch(err){
+    res.status(500).json({error:err.message});
+  }
+});
 
 
 module.exports = router;

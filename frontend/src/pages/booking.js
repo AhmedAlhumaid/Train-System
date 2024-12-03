@@ -4,8 +4,8 @@ import Ticket from "../components/ticket";
 import logo from "../assets/images/logo.png";
 import Spinner from "../components/spinner";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useMemo } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useEffect, useState} from "react";
+
 
 function Booking() {
     const [booking, setBooking] = useState(null); // State for train data
@@ -36,7 +36,6 @@ function Booking() {
                
             } catch (err) {
                 console.error("Error fetching booking info:", err.message);
-                setLoading(false)
                 setError(err.message);
             }
         };
@@ -55,7 +54,7 @@ function Booking() {
             </div>
         );
     }
-    if(error){ // 
+    if(error){ 
         console.log("error")
         return (
             <div className={styles.container}>

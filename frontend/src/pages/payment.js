@@ -10,9 +10,8 @@ function Payment(){
     const location = useLocation(); // Access the location object
     console.log(location.state)
     const { selectedSeats } = location.state || {};
-    console.log(selectedSeats)
     // Extract selectedSeats from state
-    const {id} = useParams()
+    const {id} = useParams() // get the train id 
     const navigate = useNavigate();
     const [train, setTrain] = useState(null); // State for train data
     const [cardNum,setCardNum] = useState("");
@@ -48,7 +47,6 @@ function Payment(){
     async function handleSumbit(){
         try{
             const token = localStorage.getItem("token")
-            console.log(token)
             const response = await fetch("/api/bookings/newBooking",
             {
                 method :"POST",
@@ -64,17 +62,34 @@ function Payment(){
             alert(errorData.error)
             throw new Error(errorData.error || "Failed to pay");
         }
-            navigate("/main")
-            alert("paid successfully")
+           addPassenger(); //add passenger to the train in the database
+           navigate("/main")
+           alert("paid successfully")
         }
         catch(err){
             console.error("Error??:", err.message);
         }
-        
-
-       
-        
     }
+    async function addPassenger(){
+        const token = localStorage.getItem("token")
+        try{
+            const response = await fetch("/api/trains/addPassenger",{
+                method:"POST",
+                headers:{
+                    "x-auth":token,
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({"trainID":id,"selectedSeats":selectedSeats})
+            });
+            if(!response.ok){
+               const  errorData = response.json();
+                throw new Error("an error occured in adding a passenged",errorData.error);
+            }
+        }
+        catch(err){
+            console.log(err.message);
+        }
+    }   
     return(
         <div className={styles.container}>
              <div className={styles.logoContainer}>
