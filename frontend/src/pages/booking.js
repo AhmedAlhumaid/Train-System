@@ -8,37 +8,42 @@ import { useEffect, useState, useMemo } from "react";
 import { useParams, useLocation } from "react-router-dom";
 
 function Booking() {
-    const [train, setTrain] = useState(null); // State for train data
-    const location = useLocation();
-    const { id } = useParams(); // Extract train ID from the route
-    const { selectedSeats } = location.state||{};
+    const [booking, setBooking] = useState(null); // State for train data
+    const [error,setError] = useState("");
     const [isLoading,setLoading] = useState(true);
     // Fetch train info from the database
     useEffect(() => {
-        console.log("Fetching train data...");
-        const fetchSeatingInfo = async () => {
+        console.log("Fetching Booking data...");
+        const fetchBookingInfo = async () => {
+            const token = localStorage.getItem("token");
             try {
-                const response = await fetch(`/api/trains/train?id=${id}`);
+                const response = await fetch(`/api/bookings/getBooking`,{
+                    headers:{"x-auth":token}
+                });
+                
                 if (!response.ok) {
-                    setTrain(null);
-                    setLoading(false)
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    const errorData = await response.json();
+                    setBooking(null);
+                    setLoading(false);
+                    throw new Error(errorData.error);
                 }
                 else{
-                    const trainData = await response.json();
+                    const bookingData = await response.json();
                     setLoading(false)
-                    setTrain(trainData); // Update state with fetched train data
+                    setBooking(bookingData); // Update state with fetched train data
+                    
                 }
                
             } catch (err) {
-                console.error("Error fetching train info:", err);
+                console.error("Error fetching booking info:", err.message);
+                setLoading(false)
+                setError(err.message);
             }
         };
 
-        if (id) {
-            fetchSeatingInfo();
-        }
-    }, [id]); // Dependency array ensures this effect only runs when `id` changes
+    
+            fetchBookingInfo();
+    }, [booking]); // Dependency array ensures this effect only runs when `id` changes
 
 
 
@@ -50,7 +55,8 @@ function Booking() {
             </div>
         );
     }
-    if(!train){ // 
+    if(error){ // 
+        console.log("error")
         return (
             <div className={styles.container}>
                 <div className={styles.logoContainer}>
@@ -78,7 +84,7 @@ function Booking() {
                     <img src={backIcon} alt="Back" />
                 </Link>
             </div>
-            <Ticket seats={selectedSeats} train={train} />
+            <Ticket booking = {booking} />
         </div>
     );
 }

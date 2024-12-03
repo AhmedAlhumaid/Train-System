@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 function Main(){
     const navigate = useNavigate();
     function handleClick(){
-       
         navigate("/booking");
     }
     return (
