@@ -4,7 +4,7 @@ function Ticket(props){
   const seats = props.seats
   const train = props.train
   console.log(train);
-  const seatsString = Object.keys(seats).join(" ")
+  const seatsString = Object.values(seats).join(" ")
   const date = convertToRegularDate(train.date);
   console.log(date)
   function convertToRegularDate(yyyymmdd){

@@ -8,6 +8,8 @@ import Trains from "./pages/trains";
 import Seats from './pages/seats';
 import Payment from './pages/payment';
 import Booking from './pages/booking';
+import AdminDashboard from './pages/AdminDashboard';
+import AssignStaff from './pages/AssignStaff';
 
 
 function App() {
@@ -19,10 +21,13 @@ function App() {
         <Route path ="/register" element={<Register></Register>}></Route>
         <Route path = "/login" element = {<Login></Login>}></Route>
         <Route path = "/main" element = {<Main></Main>} ></Route>
+        <Route path = "/admin" element = {<AdminDashboard></AdminDashboard>} ></Route>
         <Route path = "/trains" element = {<Trains></Trains>} ></Route>
         <Route path = "/seats/:id" element={<Seats></Seats>}></Route>
         <Route path="/payment/:id" element= {<Payment></Payment>}></Route>
         <Route path ="/booking/:id" element = {<Booking></Booking>}></Route>
+        <Route path="/admin/assign-staff" element={<AssignStaff />} />
+
         </Routes>
       </Router>
     </div>

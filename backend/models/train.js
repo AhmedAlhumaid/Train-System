@@ -61,6 +61,11 @@ const TrainSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  engineer: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   currentCapacity: {
     type: Number,
     required: true,

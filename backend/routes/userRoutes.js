@@ -50,7 +50,12 @@ router.post('/register', async (req, res) => {
       const token = jwt.encode(payload,SECRET_KEY); //generate a string token for the user
       
       // Authentication successful
-      res.json({ message: 'Authentication successful', token});
+      res.json({
+        message: 'Authentication successful',
+        token,
+        type: user.type, // Include the user type (admin/normal)
+      });
+      
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: error.message });
