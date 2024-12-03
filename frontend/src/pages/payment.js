@@ -61,6 +61,7 @@ function Payment(){
         );
         if(!response.ok){
             const errorData = await response.json();
+            alert(errorData.error)
             throw new Error(errorData.error || "Failed to pay");
         }
             navigate("/main")
@@ -72,7 +73,7 @@ function Payment(){
         
 
        
-        // navigate(`/booking/${id}`,{ state: { selectedSeats } })
+        
     }
     return(
         <div className={styles.container}>
@@ -81,7 +82,7 @@ function Payment(){
                     <img src={logo} alt="Train Logo" className={styles.logo} />
                 </div>
             <div className={styles.backButton}>
-            <Link to = "/seats">
+            <Link to = {`/seats/${id}`}>
              <img src={backIcon} alt="Back" />
             </Link>
             </div>

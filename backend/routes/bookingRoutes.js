@@ -15,7 +15,11 @@ router.post("/newBooking", async (req,res)=>{
      }
     const token = req.headers["x-auth"]
     try{
+        
         const decoded = jwt.decode(token, SECRET_KEY);
+        if(await Booking.findOne({"userId":decoded.userId})){
+            return res.status(404).json({error:"You have an available booking"})
+        }
         const user = await User.findOne({"_id":decoded.userId});
         
         const newBooking = new Booking({

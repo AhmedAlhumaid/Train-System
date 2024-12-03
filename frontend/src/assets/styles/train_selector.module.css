@@ -15,7 +15,8 @@
     align-items: center;
     justify-items: center;
     position: relative;
-  }
+    animation: slideInFromLeft 1s ease-out forwards; /* Fast slide-in from the left */
+  } 
 
   
   .field {
@@ -96,4 +97,14 @@
     color: #ffffff;
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
   }
-  
+  /* Keyframe Animations */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%); /* Start off-screen */
+    opacity: 0; /* Hidden at the start */
+  }
+  100% {
+    transform: translateX(0); /* End at its original position */
+    opacity: 1; /* Fully visible */
+  }
+}

@@ -56,7 +56,7 @@ function Seats() {
         <div className={styles.container}>
             <img className={styles.topImage} src={seatsLogo} alt="Seats Logo" />
             <div className={styles.backButton}>
-                <Link to="/">
+                <Link to="/main">
                     <img src={backIcon} alt="Back" />
                 </Link>
             </div>
