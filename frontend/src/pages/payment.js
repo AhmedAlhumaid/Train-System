@@ -31,7 +31,7 @@ function Payment(){
                 }
                 else{
                     const trainData = await response.json();
-        
+                    console.log(trainData);
                     setTrain(trainData); // Update state with fetched train data
                 }
                
@@ -48,6 +48,7 @@ function Payment(){
     async function handleSumbit(){
         try{
             const token = localStorage.getItem("token")
+            console.log(token)
             const response = await fetch("/api/bookings/newBooking",
             {
                 method :"POST",

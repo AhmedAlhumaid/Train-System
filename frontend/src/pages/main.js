@@ -8,7 +8,8 @@ import {Link} from "react-router-dom";
 function Main(){
     const navigate = useNavigate();
     function handleClick(){
-        navigate("/booking/674de6b4a7003ef5460b277a");
+       
+        navigate("/booking");
     }
     return (
         <div className={styles.container}>
