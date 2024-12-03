@@ -5,7 +5,7 @@ const BookingSchema = new mongoose.Schema({
     trainId: mongoose.Schema.Types.ObjectId,
     from:String,
     to:String,
-    travelDate: Date,
+    travelDate: String,
     price:Number,
     seats:[String],
     status:String,

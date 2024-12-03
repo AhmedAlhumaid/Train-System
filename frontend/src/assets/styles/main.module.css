@@ -7,12 +7,13 @@
     background-color: #ffffff;
     font-family: Arial, sans-serif;
     padding: 20px;
+    position: relative;
   }
   .backButton {
     align-self: flex-start;
     margin-bottom: -20px;
     cursor: pointer;
-    animation: slideIn 1s ease-out; /* Smooth slide-in animation */
+    animation: slideInFromLeft 0.5s ease-out forwards; /* Fast slide-in from the left */
   }
   
   .backButton img {
@@ -39,3 +40,51 @@
     font-weight: bold;
     font-family: 'Times New Roman', Times, serif;
   }
+
+  .viewTicketBtn {
+    position: absolute;
+    background-color: #1e3a8a;
+    color: #fff;
+    border: none;
+    left:73%;
+    top: -2%;
+    border-radius: 15px;
+    padding: 15px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    animation: slideInFromLeft 1s ease-out forwards; /* Fast slide-in from the left */
+  }
+
+  .viewTicketBtn:hover {
+    background-color: #1565c0;
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+
+   /* Keyframe Animations */
+   @keyframes fadeInLogo {
+    from {
+      opacity: 0;
+      transform: scale(0.8); /* Start smaller */
+    }
+    to {
+      opacity: 1;
+      transform: scale(1); /* Final size */
+    }
+  }
+  /* Keyframe Animations */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%); /* Start off-screen */
+    opacity: 0; /* Hidden at the start */
+  }
+  100% {
+    transform: translateX(0); /* End at its original position */
+    opacity: 1; /* Fully visible */
+  }
+}

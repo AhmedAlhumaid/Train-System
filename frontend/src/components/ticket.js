@@ -1,12 +1,9 @@
 import styles from "../assets/styles/ticket.module.css"
 import barcode from "../assets/images/barcode.png"
 function Ticket(props){
-  const seats = props.seats
-  const train = props.train
-  console.log(train);
-  const seatsString = Object.values(seats).join(" ")
-  const date = convertToRegularDate(train.date);
-  console.log(date)
+  const booking = props.booking;
+  const seats = props.booking.seats.join(", ")
+  const date = convertToRegularDate(booking.travelDate);
   function convertToRegularDate(yyyymmdd){
       // Extract year, month, and day from the yyyymmdd string
       const year = yyyymmdd.substring(0, 4);
@@ -25,38 +22,38 @@ function Ticket(props){
               <div className={styles.leftSection}>
                 <div className={styles.title}>Train Ticket</div>
                 <div className={styles.route}>
-                  <span className={styles.from}>{train.from}</span>
+                  <span className={styles.from}>Station {booking.from}</span>
                   <span className={styles.arrow}>→</span>
-                  <span className={styles.to}>{train.to}</span>
+                  <span className={styles.to}>Station {booking.to}</span>
                 </div>
                 <div className={styles.details}>
                   <div className={styles.detailItem}>
                     <strong>Date:</strong> {date}
                   </div>
                   <div className={styles.detailItem}>
-                    <strong>Time:</strong> {train.departureTime}
+                    <strong>Time:</strong>At noon 
                   </div>
                   <div className={styles.detailItem}>
                     <strong>Class:</strong> Economy
                   </div>
                   <div className={styles.detailItem}>
-                    <strong>Number:</strong> {train._id}
+                    <strong>Number:</strong>{booking.trainId}
                   </div>
                 </div>
               </div>
               <div className={styles.rightSection}>
                 <div className={styles.details}>
                   <div className={styles.detailItem}>
-                    <strong>Coach:</strong> B3
+                    <strong>Status:</strong> {booking.status}
                   </div>
                   <div className={styles.detailItem}>
-                    <strong>Seat:</strong> {seatsString}
+                    <strong>Seat:</strong> {seats}
                   </div>
                   <div className={styles.detailItem}>
-                    <strong>Train:</strong> {train.name}
+                    <strong>userID:</strong> {booking.userId}
                   </div>
                   <div className={styles.detailItem}>
-                    <strong>Price:</strong> ${train.price}
+                    <strong>Price:</strong> ${booking.price}
                   </div>
                 </div>
               </div>

@@ -4,8 +4,9 @@ import styles from "../assets/styles/AssignStaff.module.css";
 const AssignStaff = () => {
   const [trains, setTrains] = useState([]);
   const [staff, setStaff] = useState({});
-  const [loading, setLoading] = useState(true); // Set loading to true initially
-  const [assigning, setAssigning] = useState(false); // Separate loading state for assigning staff
+  const [loading, setLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // Fetch incomplete train list
   useEffect(() => {
@@ -14,22 +15,18 @@ const AssignStaff = () => {
         const response = await fetch(`http://localhost:5000/api/trains/IncompletetrainList`);
         const data = await response.json();
         setTrains(data);
-        // Initialize staff states for each train
         const initialStaff = {};
         data.forEach((train) => {
           initialStaff[train._id] = { driver: train.driver || "", engineer: train.engineer || "" };
         });
         setStaff(initialStaff);
-        setLoading(false); // Set loading to false after fetching
       } catch (error) {
         console.error("Error fetching incomplete train list:", error);
-        setLoading(false); // Set loading to false in case of an error
       }
     };
     fetchTrains();
   }, []);
 
-  // Handle input changes
   const handleInputChange = (trainId, field, value) => {
     setStaff((prev) => ({
       ...prev,
@@ -40,27 +37,30 @@ const AssignStaff = () => {
     }));
   };
 
-  // Handle staff assignment
   const handleAssignStaff = async (trainId) => {
     try {
-      setAssigning(true);
+      setLoading(true);
       const { driver, engineer } = staff[trainId];
       const response = await fetch(`http://localhost:5000/api/trains/assignStaff`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ trainId, driver, engineer }),
       });
-      const data = await response.json();
+
       if (response.ok) {
-        alert("Staff assigned successfully!");
+        setModalMessage(`Staff assigned successfully!`);
+        setModalVisible(true);
         setTrains(trains.filter((train) => train._id !== trainId)); // Remove the assigned train from the list
       } else {
-        alert(`Error: ${data.error}`);
+        setModalMessage(`Error`);
+        setModalVisible(true);
       }
-      setAssigning(false);
+      setLoading(false);
     } catch (error) {
       console.error("Error assigning staff:", error);
-      setAssigning(false);
+      setModalMessage("An error occurred while assigning staff.");
+      setModalVisible(true);
+      setLoading(false);
     }
   };
 
@@ -71,14 +71,22 @@ const AssignStaff = () => {
     return `${year}-${month}-${day}`;
   }
 
-  // Show a loading spinner or message until data is loaded
-  if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
-  }
-
   return (
     <div className={styles.assignStaffContainer}>
       <h2 className={styles.title}>Assign Staff</h2>
+
+      {/* Modal for Success/Error Message */}
+      {modalVisible && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <p>{modalMessage}</p>
+            <button onClick={() => setModalVisible(false)} className={styles.okButton}>
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className={styles.trainList}>
         {trains.length > 0 ? (
           trains.map((train) => (
@@ -90,11 +98,12 @@ const AssignStaff = () => {
 
               {/* Driver Input */}
               <p>
-                Driver:{"No Driver"}
+                Driver:{" "}
                 {train.driver ? (
                   <strong>{train.driver}</strong>
                 ) : (
-                  <div className={styles.inputWrapper}>
+                    <div>
+                    < div className={styles.inputWrapper}>
                     <input
                       type="text"
                       placeholder="Enter Driver Name"
@@ -103,12 +112,13 @@ const AssignStaff = () => {
                       className={styles.inputField}
                     />
                   </div>
+                  </div>
                 )}
               </p>
 
               {/* Engineer Input */}
               <p>
-                Engineer:{"No Engineer"}
+                Engineer:{" "}
                 {train.engineer ? (
                   <strong>{train.engineer}</strong>
                 ) : (
@@ -128,9 +138,9 @@ const AssignStaff = () => {
               <button
                 onClick={() => handleAssignStaff(train._id)}
                 className={styles.assignButton}
-                disabled={assigning || !staff[train._id]?.driver || !staff[train._id]?.engineer}
+                disabled={loading || !staff[train._id]?.driver || !staff[train._id]?.engineer}
               >
-                {assigning ? "Assigning..." : "Assign Staff"}
+                {loading ? "Assigning..." : "Assign Staff"}
               </button>
             </div>
           ))
@@ -143,6 +153,7 @@ const AssignStaff = () => {
 };
 
 export default AssignStaff;
+
 
 
 

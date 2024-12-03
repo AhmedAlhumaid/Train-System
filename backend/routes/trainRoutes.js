@@ -1,7 +1,9 @@
 const express = require('express');
 const Train = require('../models/train');
+const User = require("../models/user");
 const router = express.Router();
-
+const jwt = require("jwt-simple");
+const SECRET_KEY = "qs3h6z0JUN9wgTy1j2Cl54gB6yzG"
 // Get trains based on search criteria
 router.get('/trainList', async (req, res) => {
   try {
@@ -34,7 +36,9 @@ router.get("/train",async (req,res)=>{
   try{
     const {id} = req.query;
     const train = await Train.findOne({"_id":id});
-    console.log(train)
+    if(!train){
+     return res.status(404).json({message:"no train with the given id is found"})
+    }
     res.status(200).json(train)
   }
   catch(err){
@@ -42,19 +46,30 @@ router.get("/train",async (req,res)=>{
   }
 });
 
-// Fetch trains without assigned staff
-router.get('/IncompletetrainList', async (req, res) => {
-  try {
-    const incompleteTrains = await Train.find({
-      $or: [{ driver: null }, { engineer: null }], // Find trains missing driver or engineer
-    });
-    res.json(incompleteTrains);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+router.post("/addPassenger",async(req,res)=>{
+  try{
+    if (!req.headers["x-auth"]) {
+      return res.status(404).json({error: "Missing X-Auth header"});
+   }
+    const {trainID,selectedSeats} = req.body; 
+    const token = req.headers["x-auth"]
+    const decoded = jwt.decode(token,SECRET_KEY);
+    const user = await User.findOne({"_id":decoded.userId})
+    const train = await Train.findOne({"_id":trainID});
+    train.users.push(user.firstName);
+
+    for(const seat of selectedSeats){
+      train.seats.set(seat, false); 
+    }
+
+    await train.save();
+    return res.status(200).json({message:"train updated successfully"})
+  }
+  catch(err){
+    res.status(500).json({error:err.message});
   }
 });
 
-// Assign staff to a train
 router.post('/assignStaff', async (req, res) => {
   try {
     const { trainId, driver, engineer } = req.body;
@@ -81,13 +96,23 @@ router.post('/assignStaff', async (req, res) => {
     // Save the updated train record
     await train.save();
 
-    res.status(200).json({ message: "Staff assigned successfully!", train });
+    res.status(200).json({ message: "Staff assigned successfully!" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-
+router.get('/IncompletetrainList', async (req, res) => {
+  try {
+    // Find trains with missing driver or engineer
+    const incompleteTrains = await Train.find({
+      $or: [{ driver: null }, { engineer: null }],
+    });
+    res.json(incompleteTrains);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 
 module.exports = router;

@@ -121,6 +121,46 @@
   }
 }
 
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 40px;
+  width: 500px; /* Increased width */
+  text-align: center;
+}
+
+.modalContent {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 18px; /* Increased font size */
+  color: #333;
+  line-height: 1.6; /* Improved readability */
+  margin-bottom: 20px;
+}
+
+.okButton {
+  margin-top: 20px;
+  padding: 15px 30px; /* Larger button */
+  background: linear-gradient(45deg, #1976d2, #ff5722); /* Modern gradient */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px; /* Larger font size */
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.okButton:hover {
+  background: linear-gradient(45deg, #145ca8, #e64a19); /* Slightly darker gradient on hover */
+  transform: scale(1.05); /* Slight hover effect */
+}
+
 
 
   

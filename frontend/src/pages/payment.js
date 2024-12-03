@@ -3,26 +3,93 @@ import backIcon from "../assets/images/back-icon.png";
 import visaIcon from "../assets/images/visa-icon.png";
 import cardIcon from "../assets/images/card-icon.png";
 import logo from "../assets/images/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate,useLocation,useParams} from "react-router-dom";
 import { Link } from "react-router-dom";
 function Payment(){
     const location = useLocation(); // Access the location object
     console.log(location.state)
     const { selectedSeats } = location.state || {};
-    console.log(selectedSeats)
     // Extract selectedSeats from state
-    const {id} = useParams()
+    const {id} = useParams() // get the train id 
     const navigate = useNavigate();
-
+    const [train, setTrain] = useState(null); // State for train data
     const [cardNum,setCardNum] = useState("");
     const [name,setName] = useState("");
     const [expiryDate,setExpiryDate] = useState("")
     const [CVV,setCVV] = useState("");
+    useEffect(() => {
+        console.log("Fetching train data...");
+        const fetchTrainInfo = async () => {
+            try {
+                const response = await fetch(`/api/trains/train?id=${id}`);
+                if (!response.ok) {
+                    setTrain(null);
+                
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                else{
+                    const trainData = await response.json();
+                    console.log(trainData);
+                    setTrain(trainData); // Update state with fetched train data
+                }
+               
+            } catch (err) {
+                console.error("Error fetching train info:", err);
+            }
+        };
 
-    function handleSumbit(){
-        navigate(`/booking/${id}`,{ state: { selectedSeats } })
+        if (id) {
+            fetchTrainInfo();
+        }
+    }, [id]); // Dependency array ensures this effect only runs when `id` changes
+
+    async function handleSumbit(){
+        try{
+            const token = localStorage.getItem("token")
+            const response = await fetch("/api/bookings/newBooking",
+            {
+                method :"POST",
+                headers:{"x-auth":token,
+                        "Content-Type":"application/json"
+                },
+                body: JSON.stringify({"trainObject":train,"seats":selectedSeats})
+            }
+
+        );
+        if(!response.ok){
+            const errorData = await response.json();
+            alert(errorData.error)
+            throw new Error(errorData.error || "Failed to pay");
+        }
+           addPassenger(); //add passenger to the train in the database
+           navigate("/main")
+           alert("paid successfully")
+        }
+        catch(err){
+            console.error("Error??:", err.message);
+        }
     }
+    async function addPassenger(){
+        const token = localStorage.getItem("token")
+        try{
+            const response = await fetch("/api/trains/addPassenger",{
+                method:"POST",
+                headers:{
+                    "x-auth":token,
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({"trainID":id,"selectedSeats":selectedSeats})
+            });
+            if(!response.ok){
+               const  errorData = response.json();
+                throw new Error("an error occured in adding a passenged",errorData.error);
+            }
+        }
+        catch(err){
+            console.log(err.message);
+        }
+    }   
     return(
         <div className={styles.container}>
              <div className={styles.logoContainer}>
@@ -30,7 +97,7 @@ function Payment(){
                     <img src={logo} alt="Train Logo" className={styles.logo} />
                 </div>
             <div className={styles.backButton}>
-            <Link to = "/seats">
+            <Link to = {`/seats/${id}`}>
              <img src={backIcon} alt="Back" />
             </Link>
             </div>
