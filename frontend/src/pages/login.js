@@ -18,33 +18,45 @@ function Login(){
         setPassword(e.target.value)
     }
 
-    async function handleSubmit(){
-        try {
-            const response = await fetch("api/users/login", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email, password }),//"{email:"example.com",password:"pass"}"
-            });
-            console.log(response);
-            if (!response.ok) {
-              const errorData = await response.json();
-              throw new Error(errorData.error || "Failed to login");
-            }
-      
-            const data = await response.json();
-            console.log("Login successful:", data);
-            console.log(data.token)
-            localStorage.setItem("token",data.token); //store the token on the browser for future api requests
-            setError("")
-            navigate("/main")
-            // Handle successful login here (e.g., redirect, save token, etc.)
-          } catch (err) {
-            console.error("Error logging in:", err.message);
-            setError(err.message); // Display error to the user
-          }
+    async function handleSubmit() {
+      try {
+        const response = await fetch("api/users/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }), // { email: "example.com", password: "pass" }
+        });
+    
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to login");
+        }
+    
+        const data = await response.json();
+        console.log("Login successful:", data);
+        console.log(data.token);
+    
+        // Store the token and user data on the browser for future API requests
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userType", data.type); // Assuming the API response includes user type
+    
+        setError("");
+    
+        // Navigate based on user type
+        if (data.type === "Admin") {
+          navigate("/admin");
+        } else if (data.type === "normal") {
+          navigate("/main");
+        } else {
+          throw new Error("Unknown user type");
+        }
+      } catch (err) {
+        console.error("Error logging in:", err.message);
+        setError(err.message); // Display error to the user
+      }
     }
+    
     return(
 
         <div className={styles.container}>

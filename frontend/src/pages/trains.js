@@ -30,7 +30,7 @@ function TrainsList() {
       try {
         const response = await fetch(
           `http://localhost:5000/api/trains/trainList?from=${from}&to=${to}&date=${departureDate}`
-        );
+        ); 
 
         if (!response.ok) {
           throw new Error("Failed to fetch trains.");

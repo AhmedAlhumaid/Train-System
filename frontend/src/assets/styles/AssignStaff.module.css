@@ -1,0 +1,166 @@
+/* Container for the Assign Staff Page */
+.assignStaffContainer {
+  padding: 40px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, #e0f7fa, #e3f2fd);
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Title Styling */
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #1976d2, #ff5722);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Train List Container */
+.trainList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Train Card Styling */
+.trainCard {
+  position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  overflow: hidden; /* Ensures the animated border stays within bounds */
+  z-index: 1;
+  transition: transform 0.4s ease, box-shadow 0.4s ease; /* Hover animation */
+}
+
+.trainCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.trainCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px; /* Matches the card's border-radius */
+  padding: 2px; /* Border thickness */
+  background: linear-gradient(90deg, #1976d2, #ff5722, #4caf50, #f44336);
+  background-size: 300% 300%; /* Larger size for smooth animation */
+  animation: moveBorder 4s linear infinite; /* Infinite animation */
+  z-index: -1; /* Places the animation behind the card content */
+  -webkit-mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+  -webkit-mask-composite: destination-out; /* For WebKit browsers */
+  mask-composite: exclude; /* For other browsers */
+}
+
+/* Input Wrapper with Animated Border */
+.inputWrapper {
+  position: relative;
+  width: 80%;
+  margin: 10px auto;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px; /* Thickness of the border */
+  background: linear-gradient(90deg, #1976d2, #ff5722, #4caf50, #f44336); /* Gradient */
+  background-size: 300% 300%;
+  animation: moveBorder 4s linear infinite;
+}
+
+.inputField {
+  width: 92%;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  font-size: 14px;
+  z-index: 1;
+}
+
+/* Assign Button Styling */
+.assignButton {
+  background: linear-gradient(45deg, #1976d2, #ff5722);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.assignButton:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #1565c0, #e64a19);
+}
+
+/* No Trains Found Message */
+.noTrains {
+  font-size: 18px;
+  color: #555;
+}
+
+/* Keyframes for Animated Border */
+@keyframes moveBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 40px;
+  width: 500px; /* Increased width */
+  text-align: center;
+}
+
+.modalContent {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 18px; /* Increased font size */
+  color: #333;
+  line-height: 1.6; /* Improved readability */
+  margin-bottom: 20px;
+}
+
+.okButton {
+  margin-top: 20px;
+  padding: 15px 30px; /* Larger button */
+  background: linear-gradient(45deg, #1976d2, #ff5722); /* Modern gradient */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px; /* Larger font size */
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.okButton:hover {
+  background: linear-gradient(45deg, #145ca8, #e64a19); /* Slightly darker gradient on hover */
+  transform: scale(1.05); /* Slight hover effect */
+}
+
+
+
+  
