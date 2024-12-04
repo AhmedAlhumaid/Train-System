@@ -13,7 +13,7 @@ function Ticket(props){
       // Return the formatted string
       return `${year}-${month}-${day}`;
   }
-  if(booking && seats){
+  
     return (
       <div className={styles.ticketContainer}>
         <div className={styles.ticket}>
@@ -65,6 +65,6 @@ function Ticket(props){
     );
   }
 
-    }
+    
 
 export default Ticket;

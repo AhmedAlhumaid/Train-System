@@ -49,23 +49,19 @@ function Booking() {
    async function onCancel(){
         const token = localStorage.getItem("token");
         try{
-            setLoading(true);
             const response = await fetch("/api/bookings/cancelBooking",{
                 method:"DELETE",
                 headers:{"x-auth":token}
             }
             )
             if(!response.ok){
-                const errorData = response.json();
+                const errorData = await  response.json();
                 throw new Error("Error occured in cancellation:",errorData.error )
             }
-            setBooking(null);
-            setLoading(false);
             navigate("/main")
             alert("Booking Cancelled")
         }
         catch(err){
-            setLoading(false);
             setError(err.message);
             console.log(err.message);
         }
