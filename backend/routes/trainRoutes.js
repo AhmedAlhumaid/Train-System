@@ -215,7 +215,15 @@ function convertTo12HourFormat(time24) {
   const period = hours24 >= 12 ? "PM" : "AM";
   const hours12 = hours24 % 12 || 12; // Convert 0 hours to 12 for AM
 
+  const hours12Str = hours12.toString(); // Convert hours to a string for length check
+
+  if(hours12Str.length === 1){
+    return `0${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
+  }
+  else{
+
   return `${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
+  }
 }
 
 

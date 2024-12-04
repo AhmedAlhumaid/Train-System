@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../components/Logo";
 import styles from "../assets/styles/AddTrain.module.css";
-import backIcon from "../assets/images/back-icon.png";
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,8 +9,8 @@ const AddTrain = () => {
     name: "Train A", // Default value
     departureTime: "",
     arrivalTime: "",
-    from: "",
-    to: "",
+    from: "1",
+    to: "2",
     date: "",
     price: "",
     driver: "",
