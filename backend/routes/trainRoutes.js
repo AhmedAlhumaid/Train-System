@@ -8,8 +8,7 @@ const SECRET_KEY = "qs3h6z0JUN9wgTy1j2Cl54gB6yzG"
 router.get('/trainList', async (req, res) => {
   try {
     const { from, to, date } = req.query;
-    console.log(from, to, date)
-    
+  
     // Convert 'date' from 'yyyy-mm-dd' to 'yyyymmdd'
     const formattedDate = date.replace(/-/g, '');
     if (!from || !to || !date ) {
@@ -71,6 +70,30 @@ router.post("/addPassenger",async(req,res)=>{
   }
 });
 
+router.post("/updateAfterCancel",async (req,res)=>{
+  try{
+    const booking = req.body;
+    const train = await Train.findOne({"_id":booking.trainId});
+    const user = await User.findOne({"_id":booking.userId});
+    const selectedSeats = booking.seats;
+    const name = user.firstName;
+    train.currentCapacity = train.currentCapacity+ selectedSeats.length; 
+    const index = train.users.findIndex(user=> user === name);
+    if(index!==-1){
+      train.users.splice(index,1); //delete the user
+    }
+    for(const seat of selectedSeats){
+      train.seats.set(seat, true); 
+    }
+    await train.save();// save the modifications
+   return res.status(200).json({message:"Updated Successfully After Cancel"});
+
+  }
+  catch(err){
+    res.status(500).json({error:err.message});
+  }
+})
+
 router.post('/assignStaff', async (req, res) => {
   try {
     const { trainId, driver, engineer } = req.body;
@@ -114,6 +137,7 @@ router.get('/IncompletetrainList', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 module.exports = router;

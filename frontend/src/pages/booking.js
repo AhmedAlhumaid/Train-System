@@ -55,9 +55,12 @@ function Booking() {
             }
             )
             if(!response.ok){
-                const errorData = await  response.json();
+                const errorData = await response.json();
                 throw new Error("Error occured in cancellation:",errorData.error )
             }
+            const bookingData = await response.json();
+            console.log(bookingData,"before UTI")
+            await updateTrainInfo(bookingData)
             navigate("/main")
             alert("Booking Cancelled")
         }
@@ -66,6 +69,27 @@ function Booking() {
             console.log(err.message);
         }
         
+    }
+    async function updateTrainInfo(booking){
+        try{
+            console.log("booking in uti", booking)
+            const token = localStorage.getItem("token")
+            const response = await fetch("/api/trains/updateAfterCancel",{
+                method:"POST",
+                headers:{
+                    "x-auth":token,
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(booking)
+            });
+            if(!response.ok){
+                const errorData = await response.json();
+                throw new Error(errorData.error);
+            }
+        }
+        catch(err){
+            console.log(err.message);
+        }
     }
 
     // If train data is still loading, show a loader

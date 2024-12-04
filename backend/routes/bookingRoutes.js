@@ -8,7 +8,6 @@ const SECRET_KEY = "qs3h6z0JUN9wgTy1j2Cl54gB6yzG"
 
 router.post("/newBooking", async (req,res)=>{
     const {trainObject,seats} = req.body;
-    console.log(trainObject,seats)
     if (!req.headers["x-auth"]) {
 
         return res.status(404).json({error: "Missing X-Auth header"});
@@ -68,8 +67,9 @@ router.delete("/cancelBooking",async(req,res)=>{ //this is for the passenger
     const token = req.headers["x-auth"]
     try{
         const decoded = jwt.decode(token, SECRET_KEY);
-        const deletedBooking = await Booking.deleteOne({"userId":decoded.userId});
-        res.status(200).json({message:"deleted successfully"});
+        const booking = await Booking.findOne({"userId":decoded.userId});
+        await Booking.deleteOne({"userId":decoded.userId});
+        res.status(200).json(booking);
     }
     catch(err){
         res.status(500).json({error:err.message});
