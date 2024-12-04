@@ -3,11 +3,13 @@ const Booking = require('../models/booking');
 const User = require("../models/user")
 const jwt = require("jwt-simple");
 const router = express.Router();
+const sendMail = require("../mailer.js");
 //JWT secret key
 const SECRET_KEY = "qs3h6z0JUN9wgTy1j2Cl54gB6yzG"
 
 router.post("/newBooking", async (req,res)=>{
     const {trainObject,seats} = req.body;
+    
     if (!req.headers["x-auth"]) {
 
         return res.status(404).json({error: "Missing X-Auth header"});
@@ -20,7 +22,18 @@ router.post("/newBooking", async (req,res)=>{
             return res.status(404).json({error:"You have an available booking"})
         }
         const user = await User.findOne({"_id":decoded.userId});
-        
+        //if query is empty means the user paid, else the user did not pay
+        const status = Object.keys(req.query.status || {}).length === 0 ? "paid" : "not paid";
+        if(status=="not paid"){
+            const recipientEmail = user.email; 
+            //send email to the recipient 
+            await sendMail(recipientEmail,
+                "Ticket Payment Reminder",
+                "Hi, you have not paid for your ticket yet!"
+            )
+            console.log("Reminder email sent to:", recipientEmail);
+        }
+
         const newBooking = new Booking({
             "userId":user._id,
             "trainId":trainObject._id,
@@ -29,7 +42,7 @@ router.post("/newBooking", async (req,res)=>{
             "travelDate":trainObject.date,
             "price": trainObject.price,
             "seats":seats,
-            "status":"paid"
+            "status":status
         });
         await newBooking.save();
         res.status(201).json({message:"booking created successfully"})  

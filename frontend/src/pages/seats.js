@@ -48,7 +48,6 @@ function Seats() {
         const selectedSeats = Object.keys(seats).filter(
             (seatNumber) => seats[seatNumber] === "selected"
         );
-        console.log(selectedSeats)
         navigate(`/payment/${id}`, { state: { selectedSeats } });
     }
 

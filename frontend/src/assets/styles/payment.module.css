@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #ffffff;
+    background: linear-gradient(to bottom, #f5f7fa, #c3cfe2);
     font-family: Arial, sans-serif;
     padding: 20px;
   }
@@ -102,6 +102,23 @@
   .payButton:hover {
     background-color: #1565c0;
     transform: scale(1.05); /* Slight zoom on hover */
+  }
+
+  .footerLinks span {
+    top:86.5%;
+    left: 65%;
+    position: absolute;
+    color: #444;
+  }
+  
+  .footerLinks b {
+    color: #000;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .footerLinks b:hover {
+    color: #1e88e5; /* Matches the button color */
   }
 
    /* Keyframe Animations */

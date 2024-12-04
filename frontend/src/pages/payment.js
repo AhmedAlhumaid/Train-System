@@ -8,7 +8,6 @@ import { useNavigate,useLocation,useParams} from "react-router-dom";
 import { Link } from "react-router-dom";
 function Payment(){
     const location = useLocation(); // Access the location object
-    console.log(location.state)
     const { selectedSeats } = location.state || {};
     // Extract selectedSeats from state
     const {id} = useParams() // get the train id 
@@ -18,8 +17,8 @@ function Payment(){
     const [name,setName] = useState("");
     const [expiryDate,setExpiryDate] = useState("")
     const [CVV,setCVV] = useState("");
+    const [isPaid,setPaid] = useState(true)
     useEffect(() => {
-        console.log("Fetching train data...");
         const fetchTrainInfo = async () => {
             try {
                 const response = await fetch(`/api/trains/train?id=${id}`);
@@ -30,7 +29,6 @@ function Payment(){
                 }
                 else{
                     const trainData = await response.json();
-                    console.log(trainData);
                     setTrain(trainData); // Update state with fetched train data
                 }
                
@@ -44,7 +42,7 @@ function Payment(){
         }
     }, [id]); // Dependency array ensures this effect only runs when `id` changes
 
-    async function handleSumbit(){
+    async function handlePayNow(){
         try{
             const token = localStorage.getItem("token")
             const response = await fetch("/api/bookings/newBooking",
@@ -70,6 +68,35 @@ function Payment(){
             console.error("Error??:", err.message);
         }
     }
+    async function handlePayLater(){
+        try{
+            setPaid(false);
+            const token = localStorage.getItem("token");
+            const response = await fetch(`/api/bookings/newBooking?status=${isPaid}`,
+            {
+                method :"POST",
+                headers:{"x-auth":token,
+                        "Content-Type":"application/json"
+                },
+                body: JSON.stringify({"trainObject":train,"seats":selectedSeats})
+            }
+
+        );
+        if(!response.ok){
+            const errorData = await response.json();
+            alert(errorData.error)
+            throw new Error(errorData.error || "Failed to pay");
+        }
+        addPassenger(); //add passenger to the train in the database
+        navigate("/main")
+        alert("booking was made successfully")
+        }
+        catch(err){
+            console.log(err.message);
+        }
+    }
+
+    //add a passenger function 
     async function addPassenger(){
         const token = localStorage.getItem("token")
         try{
@@ -148,9 +175,14 @@ function Payment(){
                     value={CVV}
                 />
             </div>
-            <button className={styles.payButton} onClick={handleSumbit}
+            <button className={styles.payButton} onClick={handlePayNow}
                 >Pay!</button>
-
+             <div className={styles.footerLinks}>
+            <span onClick={handlePayLater}>
+            
+              <b>Pay later?</b>
+            </span>
+          </div>   
         </div>
     );
 }
