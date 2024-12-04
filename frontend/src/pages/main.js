@@ -16,7 +16,7 @@ function Main(){
         <Link to = "/">
         <img src={backIcon} alt="Back" />
         </Link>
-            </div>
+        </div>
               <div className={styles.logoContainer}>
             <span className={styles.tagline}>TRAIN TICKET BOOKING</span>
             <img src={logo} alt="Train Logo" className={styles.logo} />

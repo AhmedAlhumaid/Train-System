@@ -1,0 +1,131 @@
+/* Overall Page Container */
+.container {
+    background: linear-gradient(135deg, #e3f2fd, #e0f7fa, #fffde7); /* Matches Admin Dashboard theme */
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Page Title */
+  .title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    background: linear-gradient(45deg, #1976d2, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  
+  /* Cards Section */
+  .cardsContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  /* Dashboard Card Styling */
+  .dashboardCard {
+    position: relative;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    width: 280px;
+    border-radius: 70px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  /* Card Gradient Border */
+  .dashboardCard::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    border-radius: 70px;
+    background: linear-gradient(45deg, #1976d2, #ff5722);
+    padding: 2px;
+    -webkit-mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+  }
+  
+  .dashboardCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Card Title */
+  .cardTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 10px;
+  }
+  
+  /* Card Description */
+  .cardDescription {
+    font-size: 14px;
+    color: #475569;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Styling */
+  .cardButton {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #1976d2, #ff5722);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .cardButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .cardsContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  .backButton {
+    position: fixed; /* Fixes the button in the viewport */
+    top: 20px; /* Distance from the top of the page */
+    left: 20px; /* Distance from the left of the page */
+    background: linear-gradient(45deg, #1976d2, #ff5722);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: transform 0.2s, background 0.3s;
+    text-align: center;
+    z-index: 10; /* Ensures the button appears above other elements */
+  }
+  
+  .backButton:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(45deg, #1565c0, #e64a19);
+  }

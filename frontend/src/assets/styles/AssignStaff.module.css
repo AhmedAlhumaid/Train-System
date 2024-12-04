@@ -160,6 +160,27 @@
   background: linear-gradient(45deg, #145ca8, #e64a19); /* Slightly darker gradient on hover */
   transform: scale(1.05); /* Slight hover effect */
 }
+.backButton {
+  position: fixed; /* Fixes the button in the viewport */
+  top: 20px; /* Distance from the top of the page */
+  left: 20px; /* Distance from the left of the page */
+  background: linear-gradient(45deg, #1976d2, #ff5722);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: transform 0.2s, background 0.3s;
+  text-align: center;
+  z-index: 10; /* Ensures the button appears above other elements */
+}
+
+.backButton:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(45deg, #1565c0, #e64a19);
+}
 
 
 
