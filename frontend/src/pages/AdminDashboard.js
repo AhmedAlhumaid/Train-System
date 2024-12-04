@@ -8,6 +8,7 @@ import styles from "../assets/styles/AdminDashboard.module.css";
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
+
   const [selectedTrain, setSelectedTrain] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [loadFactor, setLoadFactor] = useState(null);
@@ -31,13 +32,15 @@ const AdminDashboard = () => {
       <Logo />
       <h2 className={styles.dashboardTitle}>Admin Dashboard</h2>
       <div className={styles.cardsContainer}>
+        
         <DashboardCard
           icon="📅"
           title="Manage Reservations"
           description="Add, edit, or cancel reservations and tickets."
           buttonText="Go to Reservations"
-          onClick={() => navigate("/admin/reservations")}
+          onClick={() => navigate("/admin/train-management")}
         />
+
         <DashboardCard
           icon="👨‍🔧"
           title="Assign Staff"

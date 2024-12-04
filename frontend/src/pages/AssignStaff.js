@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../assets/styles/AssignStaff.module.css";
+import { useNavigate } from "react-router-dom";
 
 const AssignStaff = () => {
   const [trains, setTrains] = useState([]);
@@ -7,6 +8,7 @@ const AssignStaff = () => {
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const navigate = useNavigate();
 
   // Fetch incomplete train list
   useEffect(() => {
@@ -148,6 +150,13 @@ const AssignStaff = () => {
           <p className={styles.noTrains}>No incomplete trains found.</p>
         )}
       </div>
+
+      <button
+      className={styles.backButton}
+      onClick={() => navigate("/admin")}
+    >
+      ←
+    </button>
     </div>
   );
 };

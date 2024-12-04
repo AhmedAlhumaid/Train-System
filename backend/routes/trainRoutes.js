@@ -94,6 +94,165 @@ router.post("/updateAfterCancel",async (req,res)=>{
   }
 })
 
+
+
+
+
+/**
+ * ==========================
+ * ADMIN-SPECIFIC ENDPOINTS
+ * ==========================
+ */
+
+// find trains 
+router.get('/adminTrainList', async (req, res) => {
+  try {
+    const { from, to } = req.query;
+
+    const trains = await Train.find({
+      from: new RegExp(`^${from}$`, 'i'),
+      to: new RegExp(`^${to}$`, 'i'),
+    });
+
+    if (trains.length === 0) {
+      return res.status(404).json({ message: 'No trains found for the given criteria' });
+    }
+
+    res.json(trains);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Add a new train trip
+router.post("/addTrain", async (req, res) => {
+  try {
+    const { name, departureTime, arrivalTime, from, to, date, price, driver, engineer } = req.body;
+
+    // Validate and convert price
+    const priceFloat = parseFloat(price);
+    if (isNaN(priceFloat) || priceFloat <= 0) {
+      return res.status(400).json({ error: "Price must be a positive number." });
+    }
+
+    // Validate time format for 24-hour input
+    const timeRegex = /^([01][0-9]|2[0-3]):[0-5][0-9]$/; // 24-hour format validation
+    if (!timeRegex.test(departureTime)) {
+      return res.status(400).json({ error: `${departureTime} is not a valid 24-hour time format!` });
+    }
+    if (!timeRegex.test(arrivalTime)) {
+      return res.status(400).json({ error: `${arrivalTime} is not a valid 24-hour time format!` });
+    }
+
+    // Convert 24-hour format to 12-hour format
+    const departureTime12 = convertTo12HourFormat(departureTime);
+    const arrivalTime12 = convertTo12HourFormat(arrivalTime);
+
+    // Convert time from 12-hour format to minutes
+    const convertToMinutes = (time) => {
+      const [hoursMinutes, meridiem] = time.split(" ");
+      let [hours, minutes] = hoursMinutes.split(":").map(Number);
+
+      if (meridiem.toUpperCase() === "PM" && hours !== 12) {
+        hours += 12; // Convert PM hours to 24-hour format
+      }
+      if (meridiem.toUpperCase() === "AM" && hours === 12) {
+        hours = 0; // Midnight case
+      }
+
+      return hours * 60 + minutes;
+    };
+
+    // Calculate duration
+    const departureMinutes = convertToMinutes(departureTime12);
+    const arrivalMinutes = convertToMinutes(arrivalTime12);
+
+    const durationInMinutes =
+      arrivalMinutes >= departureMinutes
+        ? arrivalMinutes - departureMinutes
+        : 1440 - (departureMinutes - arrivalMinutes); // Handle trips past midnight
+
+    const duration = `${Math.ceil(durationInMinutes / 60)} hrs`; // Round up to hours
+
+    // Format date to `yyyymmdd`
+    const formattedDate = date.replace(/-/g, "");
+
+        // Create seats Map
+        const seats = new Map();
+        for (let i = 1; i <= 10; i++) {
+          seats.set(i.toString(), true); // Seat numbers as strings with initial availability `true`
+        }
+
+    // Create the train
+    const newTrain = new Train({
+      name,
+      departureTime: departureTime12, // Store in 12-hour format
+      arrivalTime: arrivalTime12, // Store in 12-hour format
+      duration,
+      price: priceFloat,
+      from,
+      to,
+      date: formattedDate,
+      driver,
+      engineer,
+      currentCapacity: 10,
+      users: [],
+      seats:seats
+    });
+
+    await newTrain.save();
+    res.status(201).json({ message: "Train trip added successfully", train: newTrain });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Helper function to convert 24-hour format to 12-hour format
+function convertTo12HourFormat(time24) {
+  const [hours24, minutes] = time24.split(":").map(Number);
+
+  const period = hours24 >= 12 ? "PM" : "AM";
+  const hours12 = hours24 % 12 || 12; // Convert 0 hours to 12 for AM
+
+  return `${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
+}
+
+
+
+// Edit a train trip
+router.put("/editTrain/:trainId", async (req, res) => {
+  const { trainId } = req.params;
+  try {
+    const updates = req.body;
+
+    const train = await Train.findByIdAndUpdate(trainId, updates, { new: true });
+    if (!train) {
+      return res.status(404).json({ error: "Train not found" });
+    }
+
+    res.status(200).json({ message: "Train updated successfully", train });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete a train trip
+router.delete("/deleteTrain/:trainId", async (req, res) => {
+  const { trainId } = req.params;
+  try {
+    const train = await Train.findByIdAndDelete(trainId);
+    if (!train) {
+      return res.status(404).json({ error: "Train not found" });
+    }
+    res.status(200).json({ message: "Train deleted successfully", train });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.post('/assignStaff', async (req, res) => {
   try {
     const { trainId, driver, engineer } = req.body;

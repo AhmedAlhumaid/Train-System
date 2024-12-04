@@ -10,6 +10,8 @@ import Payment from './pages/payment';
 import Booking from './pages/booking';
 import AdminDashboard from './pages/AdminDashboard';
 import AssignStaff from './pages/AssignStaff';
+import AddTrain from './components/AddTrain';
+import TrainManagement from './pages/TrainManagement';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route path="/payment/:id" element= {<Payment></Payment>}></Route>
         <Route path ="/booking" element = {<Booking></Booking>}></Route>
         <Route path="/admin/assign-staff" element={<AssignStaff />} />
+        <Route path="/admin/train-management" element={<TrainManagement />} />
+        <Route path="/admin/train-management/add" element={<AddTrain />} />
 
         </Routes>
       </Router>
