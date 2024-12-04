@@ -33,7 +33,7 @@ router.post("/newBooking", async (req,res)=>{
             "status":"paid"
         });
         await newBooking.save();
-        res.status(201).json({message:"booking created successfully"})
+        res.status(201).json({message:"booking created successfully"})  
     }
     catch(err){
         console.log(err);
@@ -59,6 +59,20 @@ router.get("/getBooking",async (req,res)=>{
     catch(err){
         console.log(err);
        return res.status(500).json({error:err.message})
+    }
+});
+router.delete("/cancelBooking",async(req,res)=>{ //this is for the passenger 
+    if (!req.headers["x-auth"]) {
+        return res.status(404).json({error: "Missing X-Auth header"});
+     }
+    const token = req.headers["x-auth"]
+    try{
+        const decoded = jwt.decode(token, SECRET_KEY);
+        const deletedBooking = await Booking.deleteOne({"userId":decoded.userId});
+        res.status(200).json({message:"deleted successfully"});
+    }
+    catch(err){
+        res.status(500).json({error:err.message});
     }
 });
 module.exports = router;

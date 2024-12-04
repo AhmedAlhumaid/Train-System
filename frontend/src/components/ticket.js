@@ -15,12 +15,12 @@ function Ticket(props){
   }
     return (
         <div className={styles.ticketContainer}>
-          <img src = {barcode} alt =".." className = {styles.barcode}></img>  
           <div className={styles.ticket}>
+          <img src = {barcode} alt =".." className = {styles.barcode}></img>
             <div className={styles.pianoBlackHeader}></div>
             <div className={styles.ticketContent}>
               <div className={styles.leftSection}>
-                <div className={styles.title}>Train Ticket</div>
+                <div className={styles.title}>Swift Rail</div>
                 <div className={styles.route}>
                   <span className={styles.from}>Station {booking.from}</span>
                   <span className={styles.arrow}>→</span>

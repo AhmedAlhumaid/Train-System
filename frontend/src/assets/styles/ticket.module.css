@@ -23,17 +23,18 @@
     overflow: hidden;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     font-family: Arial, sans-serif;
+    animation: slideInFromLeft 1s ease-out forwards; /* Fast slide-in from the left */
   }
   
   .pianoBlackHeader,
-.pianoBlackFooter {
-  background-color: #333333; /* Sleek dark gray */
-  height: 30px;
-}
+  .pianoBlackFooter {
+    background: linear-gradient(to right, red, blue); /* Gradient from red to blue */
+    height: 10px;
+  }
 
 .ticketContent {
   display: flex;
-  border: 10px solid #e0e0e0; /* Light gray for a clean, modern look */
+  border: 10px solid #000000; /* Light gray for a clean, modern look */
   border-top: none;
   border-bottom: none;
   background-color: #ffffff; /* Pure white to make the content pop */
@@ -52,12 +53,16 @@
   }
   
   .title {
-    font-size: 2em;
-    font-weight: bold;
-    color: #020008;
+    font-size: 2.5em; /* Slightly larger for prominence */
+    font-weight: 400; /* Lighter weight for a handwritten feel */
+    color: #46218e; /* Deep, rich color (royal purple) */
     font-style: italic;
     margin-bottom: 20px;
-  }
+    font-family: 'Dancing Script', cursive; /* A calligraphy-style font */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adds subtle depth */
+    letter-spacing: 1px; /* Slight spacing for elegance */
+    text-align: center; /* Center-align for balance */
+}
   
   .route {
     display: flex;
@@ -94,4 +99,13 @@
     color: #333;
   }
   
-  
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%); /* Start off-screen */
+      opacity: 0; /* Hidden at the start */
+    }
+    100% {
+      transform: translateX(0); /* End at its original position */
+      opacity: 1; /* Fully visible */
+    }
+  }

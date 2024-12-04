@@ -42,9 +42,11 @@ function Booking() {
 
     
             fetchBookingInfo();
-    }, [booking]); // Dependency array ensures this effect only runs when `id` changes
+    }, []);
 
+   async function onCancel(){
 
+    }
 
     // If train data is still loading, show a loader
     if (isLoading) {
@@ -84,6 +86,8 @@ function Booking() {
                 </Link>
             </div>
             <Ticket booking = {booking} />
+            <button className={styles.cancelButton} onClick={onCancel}
+                >Cancel Booking?</button>
         </div>
     );
 }

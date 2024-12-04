@@ -7,6 +7,7 @@
     background-color: #ffffff;
     font-family: Arial, sans-serif;
     padding: 20px;
+    position: relative;
   }
   .logoContainer {
     position: absolute;
@@ -47,4 +48,51 @@
   font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-style: italic;
+}
+
+.cancelButton {
+  position: absolute;
+  background-color: #000206;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 400px;
+  animation: slideInFromLeft 1s ease-out forwards; /* Fast slide-in from the left */
+  left:61%;
+  bottom:15%;
+}
+.cancelButton:hover {
+  background-color: #1565c0;
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+ /* Keyframe Animations */
+ @keyframes fadeInLogo {
+  from {
+    opacity: 0;
+    transform: scale(0.8); /* Start smaller */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1); /* Final size */
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%); /* Start off-screen */
+    opacity: 0; /* Hidden at the start */
+  }
+  100% {
+    transform: translateX(0); /* End at its original position */
+    opacity: 1; /* Fully visible */
+  }
 }
