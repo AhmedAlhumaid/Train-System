@@ -57,7 +57,8 @@ router.post("/addPassenger",async(req,res)=>{
     const user = await User.findOne({"_id":decoded.userId})
     const train = await Train.findOne({"_id":trainID});
     train.users.push(user.firstName);
-    train.currentCapacity = train.currentCapacity-1;
+    let numberOfSeats = selectedSeats.length;
+    train.currentCapacity = train.currentCapacity-numberOfSeats;
     for(const seat of selectedSeats){
       train.seats.set(seat, false); 
     }

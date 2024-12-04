@@ -5,12 +5,14 @@ import logo from "../assets/images/logo.png";
 import Spinner from "../components/spinner";
 import { Link } from "react-router-dom";
 import { useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function Booking() {
     const [booking, setBooking] = useState(null); // State for train data
     const [error,setError] = useState("");
     const [isLoading,setLoading] = useState(true);
+    const navigate = useNavigate();
     // Fetch train info from the database
     useEffect(() => {
         console.log("Fetching Booking data...");
@@ -45,7 +47,29 @@ function Booking() {
     }, []);
 
    async function onCancel(){
-
+        const token = localStorage.getItem("token");
+        try{
+            setLoading(true);
+            const response = await fetch("/api/bookings/cancelBooking",{
+                method:"DELETE",
+                headers:{"x-auth":token}
+            }
+            )
+            if(!response.ok){
+                const errorData = response.json();
+                throw new Error("Error occured in cancellation:",errorData.error )
+            }
+            setBooking(null);
+            setLoading(false);
+            navigate("/main")
+            alert("Booking Cancelled")
+        }
+        catch(err){
+            setLoading(false);
+            setError(err.message);
+            console.log(err.message);
+        }
+        
     }
 
     // If train data is still loading, show a loader
@@ -56,7 +80,7 @@ function Booking() {
             </div>
         );
     }
-    if(error){ 
+   if(error){ 
         console.log("error")
         return (
             <div className={styles.container}>
@@ -73,7 +97,6 @@ function Booking() {
             </div>
         );
     }
-
     return (
         <div className={styles.container}>
             <div className={styles.logoContainer}>

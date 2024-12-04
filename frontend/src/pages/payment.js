@@ -83,7 +83,7 @@ function Payment(){
             });
             if(!response.ok){
                const  errorData = response.json();
-                throw new Error("an error occured in adding a passenged",errorData.error);
+                throw new Error("an error occured in adding a passenger",errorData.error);
             }
         }
         catch(err){

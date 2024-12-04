@@ -2,8 +2,8 @@ import styles from "../assets/styles/ticket.module.css"
 import barcode from "../assets/images/barcode.png"
 function Ticket(props){
   const booking = props.booking;
-  const seats = props.booking.seats.join(", ")
-  const date = convertToRegularDate(booking.travelDate);
+  const seats = booking==null? null:props.booking.seats.join(", ")
+  const date = booking==null? null: convertToRegularDate(booking.travelDate);
   function convertToRegularDate(yyyymmdd){
       // Extract year, month, and day from the yyyymmdd string
       const year = yyyymmdd.substring(0, 4);
@@ -13,54 +13,58 @@ function Ticket(props){
       // Return the formatted string
       return `${year}-${month}-${day}`;
   }
+  if(booking && seats){
     return (
-        <div className={styles.ticketContainer}>
-          <div className={styles.ticket}>
-          <img src = {barcode} alt =".." className = {styles.barcode}></img>
-            <div className={styles.pianoBlackHeader}></div>
-            <div className={styles.ticketContent}>
-              <div className={styles.leftSection}>
-                <div className={styles.title}>Swift Rail</div>
-                <div className={styles.route}>
-                  <span className={styles.from}>Station {booking.from}</span>
-                  <span className={styles.arrow}>→</span>
-                  <span className={styles.to}>Station {booking.to}</span>
-                </div>
-                <div className={styles.details}>
-                  <div className={styles.detailItem}>
-                    <strong>Date:</strong> {date}
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>Time:</strong>At noon 
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>Class:</strong> Economy
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>Number:</strong>{booking.trainId}
-                  </div>
-                </div>
+      <div className={styles.ticketContainer}>
+        <div className={styles.ticket}>
+        <img src = {barcode} alt =".." className = {styles.barcode}></img>
+          <div className={styles.pianoBlackHeader}></div>
+          <div className={styles.ticketContent}>
+            <div className={styles.leftSection}>
+              <div className={styles.title}>Swift Rail</div>
+              <div className={styles.route}>
+                <span className={styles.from}>Station {booking.from}</span>
+                <span className={styles.arrow}>→</span>
+                <span className={styles.to}>Station {booking.to}</span>
               </div>
-              <div className={styles.rightSection}>
-                <div className={styles.details}>
-                  <div className={styles.detailItem}>
-                    <strong>Status:</strong> {booking.status}
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>Seat:</strong> {seats}
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>userID:</strong> {booking.userId}
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>Price:</strong> ${booking.price}
-                  </div>
+              <div className={styles.details}>
+                <div className={styles.detailItem}>
+                  <strong>Date:</strong> {date}
+                </div>
+                <div className={styles.detailItem}>
+                  <strong>Time:</strong>At noon 
+                </div>
+                <div className={styles.detailItem}>
+                  <strong>Class:</strong> Economy
+                </div>
+                <div className={styles.detailItem}>
+                  <strong>Number:</strong>{booking.trainId}
                 </div>
               </div>
             </div>
-            <div className={styles.pianoBlackFooter}></div>
+            <div className={styles.rightSection}>
+              <div className={styles.details}>
+                <div className={styles.detailItem}>
+                  <strong>Status:</strong> {booking.status}
+                </div>
+                <div className={styles.detailItem}>
+                  <strong>Seat:</strong> {seats}
+                </div>
+                <div className={styles.detailItem}>
+                  <strong>userID:</strong> {booking.userId}
+                </div>
+                <div className={styles.detailItem}>
+                  <strong>Price:</strong> ${booking.price}
+                </div>
+              </div>
+            </div>
           </div>
+          <div className={styles.pianoBlackFooter}></div>
         </div>
-      );}
+      </div>
+    );
+  }
+
+    }
 
 export default Ticket;
