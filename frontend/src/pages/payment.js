@@ -8,7 +8,7 @@ import { useNavigate,useLocation,useParams} from "react-router-dom";
 import { Link } from "react-router-dom";
 function Payment(){
     const location = useLocation(); // Access the location object
-    const { selectedSeats } = location.state || {};
+    const { selectedSeats,num } = location.state || {};
     // Extract selectedSeats from state
     const {id} = useParams() // get the train id 
     const navigate = useNavigate();
@@ -58,14 +58,14 @@ function Payment(){
         if(!response.ok){
             const errorData = await response.json();
             alert(errorData.error)
-            throw new Error(errorData.error || "Failed to pay");
+            throw new Error(errorData.error);
         }
            addPassenger(); //add passenger to the train in the database
            navigate("/main")
            alert("paid successfully")
         }
         catch(err){
-            console.error("Error??:", err.message);
+            console.error("Error!!", err.message);
         }
     }
     async function handlePayLater(){
@@ -124,7 +124,7 @@ function Payment(){
                     <img src={logo} alt="Train Logo" className={styles.logo} />
                 </div>
             <div className={styles.backButton}>
-            <Link to = {`/seats/${id}`}>
+            <Link to = {`/seats/${id}/${num}`}>
              <img src={backIcon} alt="Back" />
             </Link>
             </div>

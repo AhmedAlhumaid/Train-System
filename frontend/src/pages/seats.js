@@ -67,7 +67,7 @@ function Seats() {
         const selectedSeats = Object.keys(seats).filter(
             (seatNumber) => seats[seatNumber] === "selected"
         );
-        navigate(`/payment/${id}`, { state: { selectedSeats } });
+        navigate(`/payment/${id}`, { state: { selectedSeats,num } });
     }
 
     async function handleJoinWaitlist() {

@@ -33,6 +33,12 @@ router.post("/newBooking", async (req,res)=>{
             )
             console.log("Reminder email sent to:", recipientEmail);
         }
+         // Parse travelDate (yyyymmdd) and departureTime into a Date object
+         const travelDate = trainObject.date; // Example: "20250101"
+         const departureTime = trainObject.departureTime; // Example: "11:43 PM"
+         const formattedDate = `${travelDate.substring(0, 4)}-${travelDate.substring(4, 6)}-${travelDate.substring(6, 8)}`;
+         const combinedDateTime = `${formattedDate} ${departureTime}`;
+         const comparableDate = new Date(combinedDateTime);
 
         const newBooking = new Booking({
             "userId":user._id,
@@ -40,6 +46,8 @@ router.post("/newBooking", async (req,res)=>{
             "from":trainObject.from,
             "to":trainObject.to,
             "travelDate":trainObject.date,
+            "comparableDate":comparableDate,
+            "email":user.email,
             "price": trainObject.price,
             "seats":seats,
             "status":status
@@ -89,3 +97,7 @@ router.delete("/cancelBooking",async(req,res)=>{ //this is for the passenger
     }
 });
 module.exports = router;
+
+
+
+/// Admin End-Points
