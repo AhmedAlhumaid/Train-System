@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 function Seats() {
-    // Seat data with status
-    const { id } = useParams(); // Extract train ID from the route
+    const { id, num } = useParams(); // Extract train ID and max number of seats from the route
     const [seats, setSeats] = useState({}); // Initialize seats as an empty object
     const navigate = useNavigate();
 
@@ -30,21 +29,32 @@ function Seats() {
 
     // Handle seat click to toggle selection
     const handleSeatClick = (seatNumber) => {
-        setSeats((seats) => {
-            if (seats[seatNumber] === false) {
-                // If the seat is reserved, do nothing
-                return seats;
-            }
+        const selectedSeatsCount = Object.values(seats).filter(
+            (status) => status === "selected"
+        ).length;
 
-            // Toggle "selected" status for available seats
-            return {
-                ...seats,
-                [seatNumber]: seats[seatNumber] === "selected" ? true : "selected",
-            };
-        });
+        if (seats[seatNumber] === false) {
+            // If the seat is reserved, do nothing
+            return;
+        }
+
+        if (
+            seats[seatNumber] !== "selected" &&
+            selectedSeatsCount >= parseInt(num, 10)
+        ) {
+            // Prevent selecting more seats than allowed
+            alert(`You can only select up to ${num} seats.`);
+            return;
+        }
+
+        // Toggle "selected" status for available seats
+        setSeats((seats) => ({
+            ...seats,
+            [seatNumber]: seats[seatNumber] === "selected" ? true : "selected",
+        }));
     };
 
-    function handleSubmit(){
+    function handleSubmit() {
         const selectedSeats = Object.keys(seats).filter(
             (seatNumber) => seats[seatNumber] === "selected"
         );
@@ -122,9 +132,12 @@ function Seats() {
                     ))}
                 </div>
             </div>
-            <button className={styles.payButton}
-            onClick = {handleSubmit}
-                >Checkout!</button>
+            <button
+                className={styles.payButton}
+                onClick={handleSubmit}
+            >
+                Checkout!
+            </button>
         </div>
     );
 }

@@ -13,7 +13,7 @@ import {Link} from "react-router-dom";
 function TrainsList() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { from, to, departureDate, travelers } = location.state;
+  const { from, to, departureDate, travellers } = location.state;
 
   const [trains, setTrains] = useState([]);
   const [error, setError] = useState("");
@@ -48,7 +48,7 @@ function TrainsList() {
 
   const handleSelectTrain = (train) => {
     const id = train._id;
-    navigate(`/seats/${id}`); // Navigate to the seats page with the train ID
+    navigate(`/seats/${id}/${travellers}`); // Navigate to the seats page with the train ID
   };
 
   return (
@@ -80,7 +80,7 @@ function TrainsList() {
         </div>
         <div className={styles.passengers}>
           <img src={passengerIcon} alt="Passengers" />
-          {travelers} Passenger(s)
+          {travellers} Passenger(s)
         </div>
       </div>
 
