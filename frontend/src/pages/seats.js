@@ -72,14 +72,19 @@ function Seats() {
 
     async function handleJoinWaitlist() {
         try{
+            setLoading(true);
             const token = localStorage.getItem("token");
             const response = await fetch("/api/waitlists/addToWaitlist",{
                 method:"POST",
                 headers:{
-                    "x-auth":token
-                }
+                    "x-auth":token,
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({id,num})
             });
             alert("You have joined the waitlist!");
+            setLoading(false);
+            navigate("/main")
             if(!response.ok){
                 const errorData = await response.json();
                 throw new Error(errorData.error);
@@ -92,6 +97,8 @@ function Seats() {
       
        
     }
+
+
 
     if (isLoading) {
         return (
