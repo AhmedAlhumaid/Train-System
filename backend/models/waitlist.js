@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
-const BookingSchema = new mongoose.Schema({
-    userId: mongoose.Schema.Types.ObjectId,
-    trainId: mongoose.Schema.Types.ObjectId,
-    NumOfPassengers:Number
-  });
+
+const waitlistSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    trainId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    numOfPassengers: { type: Number, required: true },
+    joinedAt: { type: Date, default: Date.now } // Automatically stores the date and time of joining
+});
+
+const Waitlist = mongoose.model("Waitlist", waitlistSchema);
+
+module.exports = Waitlist;

@@ -2,7 +2,8 @@ const express = require('express');
 const connectDB = require('./db.js');
 const userRoutes = require('./routes/userRoutes');
 const trainRoutes = require('./routes/trainRoutes');
-const bookingRoutes = require("./routes/bookingRoutes")
+const bookingRoutes = require("./routes/bookingRoutes");
+const waitlistRoutes = require("./routes/waitlistRoutes");
 const cors = require('cors');
 const app = express();
 const PORT = 5000;
@@ -17,7 +18,8 @@ app.use(cors());
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/trains', trainRoutes);
-app.use('/api/bookings',bookingRoutes)
+app.use('/api/bookings',bookingRoutes);
+app.use("/api/waitlists",waitlistRoutes);
 
 // Start the server
 app.listen(PORT, () => {

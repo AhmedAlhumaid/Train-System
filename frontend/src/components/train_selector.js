@@ -91,7 +91,7 @@ function TrainSelector() {
 
       {/* Traveller Dropdown */}
       <div className={styles.field}>
-        <label>Traveller</label>
+        <label>Travellers</label>
         <select
           value={travellers}
           onChange={(e) => setTravelers(e.target.value)}

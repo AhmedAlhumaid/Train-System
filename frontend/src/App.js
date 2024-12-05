@@ -31,7 +31,6 @@ function App() {
         <Route path="/admin/assign-staff" element={<AssignStaff />} />
         <Route path="/admin/train-management" element={<TrainManagement />} />
         <Route path="/admin/train-management/add" element={<AddTrain />} />
-
         </Routes>
       </Router>
     </div>

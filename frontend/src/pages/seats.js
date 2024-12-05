@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../assets/styles/seats.module.css";
 import backIcon from "../assets/images/back-icon.png";
 import seatsLogo from "../assets/images/seats.png";
+import Spinner from "../components/spinner";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -9,6 +10,8 @@ import { useParams } from "react-router-dom";
 function Seats() {
     const { id, num } = useParams(); // Extract train ID and max number of seats from the route
     const [seats, setSeats] = useState({}); // Initialize seats as an empty object
+    const [isFull, setFull] = useState(false);
+    const [isLoading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     // Fetch seating info from the database
@@ -18,6 +21,12 @@ function Seats() {
                 const response = await fetch(`/api/trains/train?id=${id}`);
                 const trainData = await response.json();
                 setSeats(trainData.seats); // Assume `trainData.seats` is an object like {1: true, 2: false}
+                setLoading(false);
+                // Check if all seats are reserved
+                const allSeatsReserved = Object.values(trainData.seats).every(
+                    (status) => status === false
+                );
+                setFull(allSeatsReserved);
             } catch (err) {
                 console.error("Error fetching seating info:", err);
             }
@@ -59,6 +68,37 @@ function Seats() {
             (seatNumber) => seats[seatNumber] === "selected"
         );
         navigate(`/payment/${id}`, { state: { selectedSeats } });
+    }
+
+    async function handleJoinWaitlist() {
+        try{
+            const token = localStorage.getItem("token");
+            const response = await fetch("/api/waitlists/addToWaitlist",{
+                method:"POST",
+                headers:{
+                    "x-auth":token
+                }
+            });
+            alert("You have joined the waitlist!");
+            if(!response.ok){
+                const errorData = await response.json();
+                throw new Error(errorData.error);
+            }
+        }
+
+        catch(err){
+            console.log(err.message);
+        }
+      
+       
+    }
+
+    if (isLoading) {
+        return (
+            <div className={styles.container}>
+                <Spinner></Spinner>
+            </div>
+        );
     }
 
     return (
@@ -132,12 +172,23 @@ function Seats() {
                     ))}
                 </div>
             </div>
+            {isFull && (
+                <button
+                    className={styles.waitlistButton}
+                    onClick={handleJoinWaitlist}
+                >
+                    Join Waitlist?
+                </button>
+            )}
+            {!isFull &&
             <button
-                className={styles.payButton}
-                onClick={handleSubmit}
-            >
-                Checkout!
+            className={styles.payButton}
+            onClick={handleSubmit}
+                >
+               Checkout!
             </button>
+            }
+            
         </div>
     );
 }
