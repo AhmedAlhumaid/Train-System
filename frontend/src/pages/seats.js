@@ -5,6 +5,7 @@ import seatsLogo from "../assets/images/seats.png";
 import Spinner from "../components/spinner";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import CustomAlert from "../components/alert";
 import { useParams } from "react-router-dom";
 
 function Seats() {
@@ -12,6 +13,7 @@ function Seats() {
     const [seats, setSeats] = useState({}); // Initialize seats as an empty object
     const [isFull, setFull] = useState(false);
     const [isLoading, setLoading] = useState(true);
+    const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
 
     // Fetch seating info from the database
@@ -52,7 +54,7 @@ function Seats() {
             selectedSeatsCount >= parseInt(num, 10)
         ) {
             // Prevent selecting more seats than allowed
-            alert(`You can only select up to ${num} seats.`);
+            setShowAlert(true)
             return;
         }
 
@@ -97,6 +99,14 @@ function Seats() {
       
        
     }
+    const handleShowAlert = () => {
+        setShowAlert(true);
+      };
+    
+      const handleCloseAlert = () => {
+        setShowAlert(false);
+      };
+    
 
 
 
@@ -109,7 +119,12 @@ function Seats() {
     }
 
     return (
+        
         <div className={styles.container}>
+            <div>
+                    <button onClick={handleShowAlert}>Show Custom Alert</button>
+                    {showAlert && <CustomAlert message= {`You cannot select more than ${num} seat`} onClose={handleCloseAlert} />}
+            </div>
             <img className={styles.topImage} src={seatsLogo} alt="Seats Logo" />
             <div className={styles.backButton}>
                 <Link to="/main">

@@ -3,6 +3,7 @@ import backIcon from "../assets/images/back-icon.png";
 import visaIcon from "../assets/images/visa-icon.png";
 import cardIcon from "../assets/images/card-icon.png";
 import logo from "../assets/images/logo.png";
+import CustomAlert from "../components/alert";
 import { useEffect, useState } from "react";
 import { useNavigate,useLocation,useParams} from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -18,6 +19,7 @@ function Payment(){
     const [expiryDate,setExpiryDate] = useState("")
     const [CVV,setCVV] = useState("");
     const [isPaid,setPaid] = useState(true)
+    const [showAlert, setShowAlert] = useState(false);
     useEffect(() => {
         const fetchTrainInfo = async () => {
             try {

@@ -52,6 +52,8 @@ router.post("/newBooking", async (req,res)=>{
             "seats":seats,
             "status":status
         });
+        user.miles = user.miles+500;
+        await user.save();
         await newBooking.save();
         res.status(201).json({message:"booking created successfully"})  
     }

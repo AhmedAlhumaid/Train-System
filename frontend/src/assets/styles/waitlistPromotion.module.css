@@ -1,0 +1,97 @@
+.dashboardContainer {
+    background: linear-gradient(to bottom, #f5f7fa, #c3cfe2);
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logoContainer {
+    text-align: center; /* Center align the text and logo */
+    margin-bottom: 40px; /* Space below the logo section */
+    animation: fadeInLogo 1.5s ease-out; /* Smooth fade-in animation */
+  }
+  
+  .tagline {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0d0478; /* Bluish color for the tagline */
+    margin-bottom: -80px; /* Space between tagline and logo */
+    margin-left: -180px;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  .backButton {
+    position: absolute; /* Position it absolutely within the container */
+    top: 20px; /* Adjust the distance from the top */
+    left: 20px; /* Adjust the distance from the left */
+    cursor: pointer;
+    animation: slideIn 1s ease-out; /* Smooth slide-in animation */
+}
+
+.backButton img {
+    width: 80px; /* Adjust button size */
+    height: 80px;
+} 
+  /* Card Styles */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+    width: 320px;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card h3 {
+    margin: 0 0 15px;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .card p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .promoteButton {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px;
+  }
+  
+  .promoteButton:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+  @keyframes fadeInLogo {
+    from {
+      opacity: 0;
+      transform: scale(0.8); /* Start smaller */
+    }
+    to {
+      opacity: 1;
+      transform: scale(1); /* Final size */
+    }
+  }
+  

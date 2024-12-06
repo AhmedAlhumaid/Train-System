@@ -82,5 +82,4 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ error: error.message }); // status code of 500 means an internal error
    }
   });
-
 module.exports = router;
