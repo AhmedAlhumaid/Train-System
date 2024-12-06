@@ -46,6 +46,7 @@ router.get("/fetchEligibleWaitlists", async (req, res) => {
             }
             
         }
+        
         // Send the filtered waitlists
         res.status(200).json(eligible);
     } catch (error) {
@@ -55,12 +56,16 @@ router.get("/fetchEligibleWaitlists", async (req, res) => {
 });
 
 router.delete("/promote-waitlist",async (req,res)=>{
-    console.log("enteredddd")
     try{
+        console.log("enterd")
         const {id} = req.query;
+        console.log(id)
+        console.log("after query")
         const waitlist = await Waitlist.findOne({"userId":id});
+        console.log(waitlist)
         const train = await Train.findOne({"_id":waitlist.trainId});
         const user = await User.findOne({"_id":id})
+        console.log(user,"user found")
         const numOfSeats = waitlist.numOfPassengers;
         const reservedSeats = []; // Array to store reserved seat numbers
         for (const [key, value] of train.seats.entries()) { // Use .entries() for Map

@@ -37,53 +37,66 @@
     width: 80px; /* Adjust button size */
     height: 80px;
 } 
-  /* Card Styles */
+
 .card {
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-style: solid;
+    border-width: 7.5px;
+    border-right-width: 4px;
+    border-left-width: 4px;
+    border-color: rgb(0, 0, 0) rgb(3, 34, 210) rgb(0, 0, 0) rgb(3, 34, 210);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 20px 0;
-    width: 320px;
-    text-align: center;
+    margin: 20px auto; /* Center the card horizontally */
+    width: 95%; /* Responsive width */
+    max-width: 1000px; /* Maximum width for large screens */
+    min-height: 220px; /* Maintain height */
+    text-align: left;
     font-family: "Poppins", sans-serif;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  }
-  
+    position: relative; /* To allow for border pseudo-elements */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+
+.poster{
+    position: absolute;
+    left: 85%;
+    bottom:40%;
+    width: 160px;
+    height: 160px;
+}
+  /* Text styles */
   .card h3 {
-    margin: 0 0 15px;
-    font-size: 20px;
+    margin: 10px 0;
+    font-size: 18px; /* Uniform font size */
     color: #333;
+    font-weight: bold;
   }
   
-  .card p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #666;
-  }
-  
+  /* Promote Button */
   .promoteButton {
-    background-color: #28a745;
+    background-color: #00343090;
     color: white;
     border: none;
     padding: 12px 20px;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
-    margin-top: 15px;
+    text-align: center;
+    align-self: center;
+    transition: all 0.3s ease;
   }
   
   .promoteButton:hover {
-    background-color: #218838;
+    background-color: #001805;
     transform: scale(1.05);
   }
+  
   @keyframes fadeInLogo {
     from {
       opacity: 0;
@@ -95,3 +108,13 @@
     }
   }
   
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%); /* Start off-screen */
+      opacity: 0; /* Hidden at the start */
+    }
+    100% {
+      transform: translateX(0); /* End at its original position */
+      opacity: 1; /* Fully visible */
+    }
+  }

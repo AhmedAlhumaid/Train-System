@@ -14,8 +14,6 @@ function WaitlistPromotion() {
   useEffect(() => {
     const fetchEligibleBookings = async () => {
       try {
-        
-        console.log("gg")
         const response = await fetch("/api/waitlists/fetchEligibleWaitlists");
         const data = await response.json();
         setEligibleWaitlists(data); // Store waitlists in state

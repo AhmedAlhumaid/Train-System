@@ -34,7 +34,7 @@ function App() {
         <Route path="/admin/train-management" element={<TrainManagement />} />
         <Route path="/admin/train-management/add" element={<AddTrain />} />
         <Route path="/admin/train-management/edit" element={<ViewTrain />} />
-
+        <Route path = "/admin/promote-waitlist" element = {<WaitlistPromotion></WaitlistPromotion>}></Route>
         </Routes>
       </Router>
     </div>
