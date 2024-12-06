@@ -9,7 +9,7 @@ function TrainSelector() {
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
     const [departureDate, setDepartureDate] = useState("");
-    const [travelers, setTravelers] = useState("1");
+    const [travellers, setTravelers] = useState("1");
     const navigate = useNavigate();
 
   
@@ -20,7 +20,7 @@ function TrainSelector() {
   
     const handleSearch = () => {
       //alert(`Searching trains from ${from} to ${to} on ${departureDate} for ${travelers} traveler(s).`);
-      navigate("/trains", { state: { from, to, departureDate, travelers } });
+      navigate("/trains", { state: { from, to, departureDate, travellers } });
     };
   
     return (
@@ -91,9 +91,9 @@ function TrainSelector() {
 
       {/* Traveller Dropdown */}
       <div className={styles.field}>
-        <label>Traveller</label>
+        <label>Travellers</label>
         <select
-          value={travelers}
+          value={travellers}
           onChange={(e) => setTravelers(e.target.value)}
           className={styles.input}
         >

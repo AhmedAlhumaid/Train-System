@@ -6,6 +6,8 @@ const BookingSchema = new mongoose.Schema({
     from:String,
     to:String,
     travelDate: String,
+    comparableDate:Date,
+    email:String,
     price:Number,
     seats:[String],
     status:String,

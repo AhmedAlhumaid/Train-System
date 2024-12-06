@@ -156,3 +156,25 @@
     background-color: #1565c0;
     transform: scale(1.05); /* Slight zoom on hover */
   }
+
+  .waitlistButton {
+    background-color: #1e3a8a;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    animation: bounceButton 1.5s ease-in-out infinite alternate; /* Bounce animation */
+  }
+  .waitlistButton:hover {
+    background-color: #1565c0;
+    transform: scale(1.05); /* Slight zoom on hover */
+  }

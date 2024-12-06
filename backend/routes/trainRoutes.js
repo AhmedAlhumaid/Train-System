@@ -306,7 +306,5 @@ router.get('/IncompletetrainList', async (req, res) => {
   }
 });
 
-
-
 module.exports = router;
 
