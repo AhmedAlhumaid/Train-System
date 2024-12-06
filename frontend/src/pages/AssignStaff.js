@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "../assets/styles/AssignStaff.module.css";
 import { useNavigate } from "react-router-dom";
+import Logo from "../components/Logo";
+
 
 const AssignStaff = () => {
   const [trains, setTrains] = useState([]);
@@ -75,6 +77,7 @@ const AssignStaff = () => {
 
   return (
     <div className={styles.assignStaffContainer}>
+      <Logo />
       <h2 className={styles.title}>Assign Staff</h2>
 
       {/* Modal for Success/Error Message */}

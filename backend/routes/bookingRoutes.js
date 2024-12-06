@@ -88,4 +88,23 @@ router.delete("/cancelBooking",async(req,res)=>{ //this is for the passenger
         res.status(500).json({error:err.message});
     }
 });
+
+
+/**
+ * ==========================
+ * ADMIN-SPECIFIC ENDPOINTS
+ * ==========================
+ */
+
+// get all Booking for admin
+router.get("/allBooking", async (req, res) => {
+    try {
+      const booking = await Booking.find();
+      res.status(200).json(booking);
+    } catch (err) {
+      console.error("Error fetching booking data:", err);
+      res.status(500).json({ error: "Failed to fetch booking data" });
+    }
+  });
+
 module.exports = router;

@@ -31,6 +31,8 @@ router.get('/trainList', async (req, res) => {
   }
 });
 
+
+
 router.get("/train",async (req,res)=>{
   try{
     const {id} = req.query;
@@ -226,24 +228,23 @@ function convertTo12HourFormat(time24) {
   }
 }
 
+// get all trains for admin
+router.get("/allTrains", async (req, res) => {
+  try {
+    const trains = await Train.find();
+    res.status(200).json(trains);
+  } catch (err) {
+    console.error("Error fetching train data:", err);
+    res.status(500).json({ error: "Failed to fetch train data" });
+  }
+});
+
+
 
 
 // Edit a train trip
 router.put("/editTrain/:trainId", async (req, res) => {
-  const { trainId } = req.params;
-  try {
-    const updates = req.body;
 
-    const train = await Train.findByIdAndUpdate(trainId, updates, { new: true });
-    if (!train) {
-      return res.status(404).json({ error: "Train not found" });
-    }
-
-    res.status(200).json({ message: "Train updated successfully", train });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: err.message });
-  }
 });
 
 // Delete a train trip

@@ -12,6 +12,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AssignStaff from './pages/AssignStaff';
 import AddTrain from './components/AddTrain';
 import TrainManagement from './pages/TrainManagement';
+import ViewTrain from './components/ViewTrain';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/admin/assign-staff" element={<AssignStaff />} />
         <Route path="/admin/train-management" element={<TrainManagement />} />
         <Route path="/admin/train-management/add" element={<AddTrain />} />
+        <Route path="/admin/train-management/edit" element={<ViewTrain />} />
 
         </Routes>
       </Router>

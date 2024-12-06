@@ -1,0 +1,149 @@
+/* Train Card */
+.trainCard {
+  width: 700px;
+  padding: 20px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #e3f2fd, #e0f7fa, #fffde7);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Slightly increased shadow for depth */
+  color: #000000; /* Neutral text color for readability */
+  position: relative;
+  overflow: hidden;
+  animation: glowingBorder 4s infinite linear;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-left: 150px; /* Adjusted for layout consistency */
+  margin-bottom: 30px; /* Added gap between cards */
+}
+
+.trainCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Animated Border */
+@keyframes glowingBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header */
+.cardHeader {
+  background: linear-gradient(45deg, #1976d2, #ff5722);
+  color: white;
+  padding: 15px;
+  font-size: 1.8rem; /* Slightly larger font for better visibility */
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* Body */
+.cardBody {
+  padding: 20px; /* Slightly increased padding for better spacing */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased spacing between sections */
+}
+
+/* Info Group */
+.infoGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px; /* Slightly increased gap between groups */
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  font-size: 1.5rem; /* Increased icon size for better visibility */
+  color: #5a9bd4; /* Consistent blue for icons */
+}
+
+.label {
+  font-weight: bold;
+  color: #2a2727; /* Neutral dark gray for labels */
+}
+
+.price {
+  font-weight: bold;
+  color: #de4141; /* Softer red for prices */
+}
+
+/* Passenger Section */
+.passengerSection {
+  margin-top: 25px;
+  padding: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.passengerHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #5a9bd4; /* Consistent blue for passenger section */
+}
+
+.passengerIcon {
+  font-size: 1.5rem;
+  color: #5a9bd4;
+}
+
+.passengerList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.passengerItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0; /* Increased padding for better spacing */
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1rem; /* Slightly larger font for better readability */
+}
+
+.userIcon {
+  font-size: 1.3rem; /* Larger icon for passengers */
+  color: #4caf50; /* Consistent green for user icons */
+}
+
+.passengerName {
+  font-weight: bold;
+  color: #333; /* Neutral text color */
+}
+
+.seatIcon {
+  font-size: 1.3rem; /* Larger icon for seats */
+  color: #e57373; /* Softer red for seat icons */
+}
+
+.seatNumber {
+  font-weight: bold;
+  color: #00fe11;
+}
+
+.noPassengers {
+  font-size: 1rem; /* Slightly larger font for consistency */
+  color: #999; /* Lighter gray for no passenger text */
+}
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
