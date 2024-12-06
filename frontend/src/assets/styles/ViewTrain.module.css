@@ -1,0 +1,168 @@
+
+/* Container */
+.editTrainContainer {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e3f2fd, #e0f7fa, #fffde7);
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 20%;
+    background: linear-gradient(135deg, #cde8fc, #cbf3f8, #f8f5cd);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .backButton {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #1976d2, #ff5722);
+    color: white;
+    cursor: pointer;
+    animation: buttonPulse 2s infinite;
+  }
+  
+  .backButton:hover {
+    background: linear-gradient(45deg, #1565c0, #e64a19);
+    transform: scale(1.1);
+  }
+  
+  /* Main Content */
+  .mainContent {
+    width: 80%;
+    padding: 20px;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: linear-gradient(45deg, #1976d2, #ff5722);
+    margin-bottom: 20px;
+  }
+  
+  /* Input Row */
+  .inputRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  /* Input Wrapper */
+  .inputWrapper {
+    width: 48%;
+    position: relative;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #1976d2, #ff5722, #4caf50, #f44336);
+    background-size: 300% 300%;
+    animation: moveBorder 4s linear infinite;
+  }
+  
+  .inputLabel {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .inputField {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    background: white;
+    margin-left: 10px;
+  }
+  
+  /* Search Button */
+  .searchButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #1976d2, #ff5722);
+    color: white;
+    cursor: pointer;
+    animation: buttonPulse 2s infinite;
+    width: 200px;
+  }
+  
+  .searchButton:hover {
+    background: linear-gradient(45deg, #1565c0, #e64a19);
+    transform: scale(1.1);
+  }
+  
+  /* Train Card */
+  .trainCard {
+    background: rgba(255, 255, 255, 0.9);
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .trainCard:hover {
+    transform: scale(1.05);
+    border: 2px solid #1976d2;
+  }
+  
+ 
+  
+  /* Animations */
+  @keyframes moveBorder {
+    0% {
+      background-position: 0% 50%;
+    }
+    
+    50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    @keyframes buttonPulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+    }
+    
+    @keyframes slideUp {
+      0% {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    label{
+      color: #ffffff;
+      text-emphasis: bold;
+
+    }

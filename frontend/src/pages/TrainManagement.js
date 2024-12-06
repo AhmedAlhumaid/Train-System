@@ -13,7 +13,7 @@ const navigate = useNavigate();
       <h1 className={styles.title}>Train Management</h1>
       <div className={styles.cardsContainer}>
         <div className={styles.dashboardCard}>
-          <h2 className={styles.cardTitle}>Add Train 🚆</h2>
+          <h2 className={styles.cardTitle}>Add Train Trip 🚆</h2>
           <p className={styles.cardDescription}>Create a new train trip.</p>
           <button
             className={styles.cardButton}
@@ -23,19 +23,19 @@ const navigate = useNavigate();
           </button>
         </div>
         <div className={styles.dashboardCard}>
-          <h2 className={styles.cardTitle}>Edit Train 🔧</h2>
+          <h2 className={styles.cardTitle}>View Train Trip 🔍</h2>
           <p className={styles.cardDescription}>
-            Search and modify an existing train trip.
+            Search an existing train trip.
           </p>
           <button
             className={styles.cardButton}
-            onClick={() => navigate("editTrain")}
+            onClick={() => navigate("/admin/train-management/edit")}
           >
             Edit Train
           </button>
         </div>
         <div className={styles.dashboardCard}>
-          <h2 className={styles.cardTitle}>Cancel Train ❌</h2>
+          <h2 className={styles.cardTitle}>Cancel Train Trip ❌</h2>
           <p className={styles.cardDescription}>
             Delete an existing train trip.
           </p>
