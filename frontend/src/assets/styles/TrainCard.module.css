@@ -135,6 +135,26 @@
   color: #999; /* Lighter gray for no passenger text */
 }
 
+  /* Search Button */
+  .deleteButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #1976d2, #ff5722);
+    color: white;
+    cursor: pointer;
+    animation: buttonPulse 2s infinite;
+    width: 200px;
+  }
+  
+  .deleteButton:hover {
+    background: linear-gradient(45deg, #1565c0, #e64a19);
+    transform: scale(1.1);
+  }
+
 
 
 

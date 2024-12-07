@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../assets/styles/TrainCard.module.css";
 
-const TrainCard = ({ train }) => {
+const TrainCard = ({ train, isCancelPage = false, deleteTrain }) => {
   const [editedData, setEditedData] = useState({
     passengers: [],
   });
@@ -119,12 +119,23 @@ const TrainCard = ({ train }) => {
             <span className={styles.noPassengers}>No passengers</span>
           )}
         </div>
+        {isCancelPage && ( // Show delete button only if `isCancelPage` is true
+          <div className={styles.deleteSection}>
+            <button 
+              className={styles.deleteButton}
+              onClick={() => deleteTrain(train._id)}
+            >
+              Cancel Train
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default TrainCard;
+
 
 
 

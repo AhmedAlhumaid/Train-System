@@ -29,9 +29,9 @@ const navigate = useNavigate();
           </p>
           <button
             className={styles.cardButton}
-            onClick={() => navigate("/admin/train-management/edit")}
+            onClick={() => navigate("/admin/train-management/view")}
           >
-            Edit Train
+            View Train
           </button>
         </div>
         <div className={styles.dashboardCard}>
@@ -41,7 +41,7 @@ const navigate = useNavigate();
           </p>
           <button
             className={styles.cardButton}
-            onClick={() => navigate("cancelTrain")}
+            onClick={() => navigate("/admin/train-management/delete")}
           >
             Cancel Train 
           </button>
