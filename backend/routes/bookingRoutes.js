@@ -1,9 +1,13 @@
 const express = require('express');
+const mongoose = require("mongoose");
 const Booking = require('../models/booking');
+const Train = require('../models/train');
 const User = require("../models/user")
 const jwt = require("jwt-simple");
 const router = express.Router();
 const sendMail = require("../mailer.js");
+const ObjectId = mongoose.Types.ObjectId;
+
 //JWT secret key
 const SECRET_KEY = "qs3h6z0JUN9wgTy1j2Cl54gB6yzG"
 
@@ -117,7 +121,94 @@ router.get("/allBooking", async (req, res) => {
     }
   });
 
+  router.post("/addBooking", async (req, res) => {
+    const { userId, trainId, seatNumber } = req.body;
+    console.log("here1")
+  
+    try {
+      // Validate input
+      if (!userId || !trainId || !seatNumber) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+      console.log("here2")
+
+      // Fetch train data
+      const train = await Train.findById(trainId);
+      if (!train) {
+        return res.status(404).json({ error: "Train not found" });
+        console.log("hereERROR")
+
+      }
+      console.log("here3")
+
+      // Fetch user data
+      const user = await User.findById(userId);
+      if (!user) {
+        console.log("hereERROR1")
+
+        return res.status(404).json({ error: "User not found" });
+
+      }
+   
+      // Add the user to the train's user list and update capacity
+      train.users.push(user.firstName);
+      train.currentCapacity -= 1;
+  
+      // Mark the seat as reserved
+      train.seats.set(seatNumber, false);
+      console.log("here4")
+
+      // Save updated train data
+      await train.save();
+      
+      // Check if the seat is already booked
+      const existingBooking = await Booking.findOne({
+        trainId: new ObjectId(trainId),
+        seats: { $in: [seatNumber] },
+      });
+  
+      if (existingBooking) {
+        console.log("hereERROR")
+        return res.status(400).json({ error: "Seat already booked" });
+      }
+  
+      // Create a new booking
+      const newBooking = new Booking({
+        userId: userId,
+        trainId: trainId,
+        from: train.from,
+        to: train.to,
+        travelDate: train.date, // Assuming train.date exists
+        comparableDate: new Date(parseDateFromString(train.date)), // Convert travelDate to a Date object
+        email: user.email, // Assuming user has an email field
+        price: train.price, // Assuming train has a price field
+        seats: [seatNumber],
+        status: "Paid", // Default status
+      });
+  
+      // Save booking to the database
+      await newBooking.save();
+      console.log("here5")
+
+      res.status(201).json({
+        message: "Booking created successfully",
+        booking: newBooking,
+      });
+    } catch (error) {
+      console.error("Error adding booking:", error.message);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+  
+const parseDateFromString = (dateString) => {
+    const year = parseInt(dateString.slice(0, 4), 10); // Extract year
+    const month = parseInt(dateString.slice(4, 6), 10) - 1; // Extract month (0-based index)
+    const day = parseInt(dateString.slice(6, 8), 10); // Extract day
+    return new Date(year, month, day); // Create a new Date object
+  };
+
 module.exports = router;
+
 
 
 

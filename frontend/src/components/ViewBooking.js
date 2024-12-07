@@ -4,7 +4,7 @@ import Logo from "./Logo";
 import TrainCard from "./TrainCard"; // Import TrainCard
 import styles from "../assets/styles/ViewTrain.module.css";
 
-const ViewTrain = () => {
+const ViewBooking = () => {
     const navigate = useNavigate();
     const [searchCriteria, setSearchCriteria] = useState({
       name: "",
@@ -20,25 +20,24 @@ const ViewTrain = () => {
 
   
     // Fetch train data from the backend
-    useEffect(() => {
-      const fetchTrainData = async () => {
-        try {
-          const response = await fetch("http://localhost:5000/api/trains/allTrains");
-          if (!response.ok) throw new Error("Failed to fetch train data");
-          const data = await response.json();
-          setTrainData(data);
-          setFilteredTrains(data); // Initially display all trains
-          setLoading(false); // Set loading to false when data is fetched
+  // Define fetchTrainData
+  const fetchTrainData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/trains/allTrains");
+      if (!response.ok) throw new Error("Failed to fetch train data");
+      const data = await response.json();
+      setTrainData(data);
+      setFilteredTrains(data); // Initially display all trains
+      setLoading(false); // Set loading to false when data is fetched
+    } catch (error) {
+      console.error("Error fetching train data:", error.message);
+      setLoading(false); // Set loading to false in case of an error
+    }
+  };
 
-        } catch (error) {
-          console.error("Error fetching train data:", error.message);
-          setLoading(false); // Set loading to false in case of an error
-
-        }
-      };
-  
-      fetchTrainData();
-    }, []);
+  useEffect(() => {
+    fetchTrainData();
+  }, []);
   
     const handleSearchChange = (e) => {
       const { name, value } = e.target;
@@ -56,7 +55,6 @@ const ViewTrain = () => {
       setFilteredTrains(filtered);
     };
 
-    
 
     if (loading) {
         // Show a loading message or spinner while fetching data
@@ -75,7 +73,7 @@ const ViewTrain = () => {
         <Logo />
       </div>
       <div className={styles.mainContent}>
-        <h2 className={styles.title}>View Train Trips 🔍</h2>
+        <h2 className={styles.title}>Adding New Booking 🔍</h2>
         <div className={styles.searchSection}>
           <div className={styles.inputRow}>
             <div className={styles.inputWrapper}>
@@ -147,6 +145,9 @@ const ViewTrain = () => {
             <TrainCard
               key={index}
               train={train}
+              isAddPage={true}
+              refreshTrains={fetchTrainData} // Pass the function as a prop
+
             />
           ))}
         </div>
@@ -155,9 +156,4 @@ const ViewTrain = () => {
   );
 };
 
-export default ViewTrain;
-
-
-
-
-
+export default ViewBooking;
