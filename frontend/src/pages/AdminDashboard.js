@@ -38,7 +38,7 @@ const AdminDashboard = () => {
           title="Manage Reservations"
           description="Add, edit, or cancel reservations and tickets."
           buttonText="Go to Reservations"
-          onClick={() => navigate("/admin/train-management")}
+          onClick={() => console.log("Default Click Handled")}
         />
 
         <DashboardCard
