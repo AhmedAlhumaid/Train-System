@@ -66,7 +66,7 @@ const ViewBooking = () => {
       <div className={styles.sidebar}>
         <button
           className={styles.backButton}
-          onClick={() => navigate("/admin/train-management")}
+          onClick={() => navigate("/admin/booking-management")}
         >
           ← Back
         </button>

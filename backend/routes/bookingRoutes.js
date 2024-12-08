@@ -6,6 +6,7 @@ const User = require("../models/user")
 const jwt = require("jwt-simple");
 const router = express.Router();
 const sendMail = require("../mailer.js");
+const { lchown } = require('fs');
 const ObjectId = mongoose.Types.ObjectId;
 
 //JWT secret key
@@ -199,6 +200,32 @@ router.get("/allBooking", async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   });
+
+ router.delete("/deleteBooking",async (req,res)=>{
+    try{
+        const {userId} = req.query;
+        const booking = await Booking.findOne({"userId":userId});
+        const trainId = booking.trainId;
+        const bookedSeats = booking.seats;
+        const train = await Train.findOne({"_id":trainId});
+        const user = await User.findOne({"_id":userId});
+        const name = user.firstName;
+        train.currentCapacity = train.currentCapacity+ bookedSeats.length; 
+        const index = train.users.findIndex(user=> user === name);
+        if(index!==-1){
+            train.users.splice(index,1); //delete the user
+            }
+        for(const seat of bookedSeats){
+                train.seats.set(seat, true); 
+              }    
+        await Booking.deleteOne({"userId":userId});// delete the booking      
+        await train.save();// save the modifications
+        return res.status(200).json({message:"Updated Successfully After Cancel"});
+    }
+    catch(err){
+        res.status(500).json({error:err.message})
+    }
+ }) 
   
 const parseDateFromString = (dateString) => {
     const year = parseInt(dateString.slice(0, 4), 10); // Extract year

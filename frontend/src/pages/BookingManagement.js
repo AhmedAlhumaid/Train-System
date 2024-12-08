@@ -19,7 +19,7 @@ const navigate = useNavigate();
             className={styles.cardButton}
             onClick={() => navigate("/admin/Booking-management/add")}
           >
-            Add Train
+            Add Booking
           </button>
         </div>
         <div className={styles.dashboardCard}>
@@ -31,7 +31,7 @@ const navigate = useNavigate();
             className={styles.cardButton}
             onClick={() => navigate("/admin/booking-management/view")}
           >
-            View Train
+            View Booking
           </button>
         </div>
         <div className={styles.dashboardCard}>
@@ -43,7 +43,7 @@ const navigate = useNavigate();
             className={styles.cardButton}
             onClick={() => navigate("/admin/booking-management/delete")}
           >
-            Cancel Train 
+            Cancel Booking
           </button>
         </div>
         <button

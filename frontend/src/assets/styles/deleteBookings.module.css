@@ -1,0 +1,82 @@
+.dashboardContainer {
+    background: linear-gradient(to bottom, #f5f7fa, #c3cfe2);
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logoContainer {
+    text-align: center; /* Center align the text and logo */
+    margin-bottom: 40px; /* Space below the logo section */
+    animation: fadeInLogo 1.5s ease-out; /* Smooth fade-in animation */
+  }
+  
+  .tagline {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0d0478; /* Bluish color for the tagline */
+    margin-bottom: -80px; /* Space between tagline and logo */
+    margin-left: -180px;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  .backButton {
+    position: absolute; /* Position it absolutely within the container */
+    top: 20px; /* Adjust the distance from the top */
+    left: 20px; /* Adjust the distance from the left */
+    cursor: pointer;
+    animation: slideIn 1s ease-out; /* Smooth slide-in animation */
+}
+
+.backButton img {
+    width: 80px; /* Adjust button size */
+    height: 80px;
+} 
+
+.bookingItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+}
+
+.cancelButton {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.cancelButton:hover {
+    background-color: #ff7875;
+}
+
+@keyframes fadeInLogo {
+    from {
+      opacity: 0;
+      transform: scale(0.8); /* Start smaller */
+    }
+    to {
+      opacity: 1;
+      transform: scale(1); /* Final size */
+    }
+  }
+  
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%); /* Start off-screen */
+      opacity: 0; /* Hidden at the start */
+    }
+    100% {
+      transform: translateX(0); /* End at its original position */
+      opacity: 1; /* Fully visible */
+    }
+  }
