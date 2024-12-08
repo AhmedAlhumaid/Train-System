@@ -1,0 +1,128 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    background: linear-gradient(45deg, #ffffff, #e3f2fd);
+    padding: 30px;
+    border-radius: 20px;
+    width: 450px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .modalContent h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1976d2;
+  }
+  
+  /* Input Wrapper */
+  .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  /* Labels */
+  .animatedLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1976d2;
+    margin-bottom: 5px;
+  }
+  
+  /* Inputs */
+  .animatedInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .animatedInput:focus {
+    border-color: #ff5722;
+    box-shadow: 0 0 8px #ff5722;
+  }
+  
+  /* Button Group */
+  .buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; /* Added space between buttons */
+  }
+  
+  /* Buttons */
+  .animatedButton {
+    flex: 1; /* Makes the buttons equal width */
+    background: linear-gradient(45deg, #1976d2, #ff5722);
+    color: #ffffff;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .animatedButton:hover {
+    background: linear-gradient(45deg, #1565c0, #2fa921);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .animatedButtonCancel {
+    flex: 1; /* Makes the buttons equal width */
+    background: linear-gradient(45deg, #1976d2, #ff5722);
+    color: #ffffff;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .animatedButtonCancel:hover {
+    background: linear-gradient(45deg, #b71c1c, #781111);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  
+  
+  

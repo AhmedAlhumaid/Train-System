@@ -4,44 +4,44 @@ import Logo from "../components/Logo";
 import {useNavigate } from "react-router-dom";
 
 
-const TrainManagement = () => {
+const BookingManagement = () => {
 const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
       <Logo />
-      <h1 className={styles.title}>Train Management</h1>
+      <h1 className={styles.title}>Booking Management</h1>
       <div className={styles.cardsContainer}>
         <div className={styles.dashboardCard}>
-          <h2 className={styles.cardTitle}>Add Train Trip 🚆</h2>
-          <p className={styles.cardDescription}>Create a new train trip.</p>
+          <h2 className={styles.cardTitle}>Add New Booking 🎟️</h2>
+          <p className={styles.cardDescription}>Create a new booking.</p>
           <button
             className={styles.cardButton}
-            onClick={() => navigate("/admin/train-management/add")}
+            onClick={() => navigate("/admin/Booking-management/add")}
           >
             Add Train
           </button>
         </div>
         <div className={styles.dashboardCard}>
-          <h2 className={styles.cardTitle}>View Train Trip 🔍</h2>
+          <h2 className={styles.cardTitle}>Edit Booking ✏️</h2>
           <p className={styles.cardDescription}>
-            Search an existing train trip.
+            Edit and search an existing booking.
           </p>
           <button
             className={styles.cardButton}
-            onClick={() => navigate("/admin/train-management/view")}
+            onClick={() => navigate("/admin/booking-management/view")}
           >
             View Train
           </button>
         </div>
         <div className={styles.dashboardCard}>
-          <h2 className={styles.cardTitle}>Cancel Train Trip ❌</h2>
+          <h2 className={styles.cardTitle}>Cancel Booking ❌</h2>
           <p className={styles.cardDescription}>
-            Delete an existing train trip.
+            Delete an existing booking.
           </p>
           <button
             className={styles.cardButton}
-            onClick={() => navigate("/admin/train-management/delete")}
+            onClick={() => navigate("/admin/booking-management/delete")}
           >
             Cancel Train 
           </button>
@@ -57,6 +57,4 @@ const navigate = useNavigate();
   );
 };
 
-export default TrainManagement;
-
-
+export default BookingManagement;

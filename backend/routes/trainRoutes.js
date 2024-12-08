@@ -1,9 +1,13 @@
 const express = require('express');
+const mongoose = require("mongoose");
 const Train = require('../models/train');
 const User = require("../models/user");
+const Booking = require("../models/booking");
 const router = express.Router();
 const jwt = require("jwt-simple");
 const SECRET_KEY = "qs3h6z0JUN9wgTy1j2Cl54gB6yzG"
+const ObjectId = mongoose.Types.ObjectId;
+
 // Get trains based on search criteria
 router.get('/trainList', async (req, res) => {
   try {
@@ -241,26 +245,32 @@ router.get("/allTrains", async (req, res) => {
 
 
 
-
-// Edit a train trip
-router.put("/editTrain/:trainId", async (req, res) => {
-
-});
-
 // Delete a train trip
 router.delete("/deleteTrain/:trainId", async (req, res) => {
-  const { trainId } = req.params;
+  const { trainId } = req.params; // Extract trainId from params
+
   try {
+    // Check if there are bookings associated with the train
+    const bookings = await Booking.find({ trainId:  new ObjectId(trainId) });
+
+    if (bookings.length > 0) {
+      // Delete all associated bookings
+      await Booking.deleteMany({ trainId:  new ObjectId(trainId) });
+    }
+
+    // Delete the train
     const train = await Train.findByIdAndDelete(trainId);
     if (!train) {
       return res.status(404).json({ error: "Train not found" });
     }
-    res.status(200).json({ message: "Train deleted successfully", train });
+
+    res.status(200).json({ message: "Train and its bookings deleted successfully", train });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
+
 
 router.post('/assignStaff', async (req, res) => {
   try {
