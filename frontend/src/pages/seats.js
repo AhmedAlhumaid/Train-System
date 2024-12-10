@@ -122,7 +122,7 @@ function Seats() {
         
         <div className={styles.container}>
             <div>
-                    <button onClick={handleShowAlert}>Show Custom Alert</button>
+                    
                     {showAlert && <CustomAlert message= {`You cannot select more than ${num} seat`} onClose={handleCloseAlert} />}
             </div>
             <img className={styles.topImage} src={seatsLogo} alt="Seats Logo" />
