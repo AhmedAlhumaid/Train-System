@@ -1,0 +1,341 @@
+.dashboardContainer {
+    background: linear-gradient(to bottom, #f5f7fa, #c3cfe2);
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logoContainer {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInLogo 1.5s ease-out;
+}
+
+.tagline {
+    display: block;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #0d0478;
+    margin-bottom: -80px;
+    margin-left: -180px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    animation: slideIn 1s ease-out;
+}
+
+.backButton img {
+    width: 80px;
+    height: 80px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.filters input,
+.filters select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 200px;
+}
+
+.filters input[type="date"] {
+    width: auto;
+}
+
+.bookingItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    width: 100%;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeInLogo 0.5s ease-out;
+}
+
+.editButton {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+.editButton:hover {
+    background-color: #66bb6a;
+}
+
+.cancelButton {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.cancelButton:hover {
+    background-color: #ff7875;
+}
+
+@keyframes fadeInLogo {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modalContent {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    animation: slideInFromTop 0.3s ease-out;
+}
+
+.modalTitle {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #0d0478;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.modalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modalLabel {
+    font-size: 1rem;
+    color: #333333;
+    font-weight: 500;
+}
+
+.modalInput,
+.modalSelect {
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.modalInput:focus,
+.modalSelect:focus {
+    border-color: #0d0478;
+}
+
+.seatRow {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.removeButton {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.removeButton:hover {
+    background-color: #ff7875;
+}
+
+.addSeatButton {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.addSeatButton:hover {
+    background-color: #66bb6a;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.saveButton {
+    background-color: #0d0478;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.saveButton:hover {
+    background-color: #14268c;
+}
+
+.cancelButton {
+    background-color: #bbbbbb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancelButton:hover {
+    background-color: #999999;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-20%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.filtersContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.searchBar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchInput {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 20%;
+    transition: border-color 0.3s;
+}
+
+.searchInput:focus {
+    border-color: #0d0478;
+    outline: none;
+}
+
+.searchSelect {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 15%;
+    transition: border-color 0.3s;
+}
+
+.searchSelect:focus {
+    border-color: #0d0478;
+    outline: none;
+}
+
+.clearButton {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.clearButton:hover {
+    background-color: #ff7875;
+}

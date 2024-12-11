@@ -29,7 +29,7 @@ const navigate = useNavigate();
           </p>
           <button
             className={styles.cardButton}
-            onClick={() => navigate("/admin/booking-management/view")}
+            onClick={() => navigate("/admin/booking-management/edit")}
           >
             View Booking
           </button>

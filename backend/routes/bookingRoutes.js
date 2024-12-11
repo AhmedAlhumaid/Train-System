@@ -226,7 +226,107 @@ router.get("/allBooking", async (req, res) => {
         res.status(500).json({error:err.message})
     }
  }) 
-  
+
+ router.put("/editBooking", async (req, res) => {
+  const { bookingId } = req.query;
+
+  try {
+    const { price, status, seats } = req.body;
+
+    // Validate seats array
+    if (!Array.isArray(seats)) {
+      return res.status(400).json({ error: "Seats must be an array" });
+    }
+
+    // Find the booking by ID
+    const booking = await Booking.findById(bookingId);
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    // Find the user associated with the booking
+    const user = await User.findById(booking.userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Find the train associated with the booking
+    const train = await Train.findById(booking.trainId);
+    if (!train) {
+      return res.status(404).json({ error: "Train not found" });
+    }
+
+    // If no updated seats, delete the booking and update the train
+    if (seats.length === 0) {
+      // Remove the user's first name from the train's users array
+      train.users = train.users.filter((name) => name !== user.firstName.trim());
+
+      // Reset seats associated with this booking to available (true)
+      booking.seats.forEach((seat) => {
+        train.seats.set(seat, true);
+      });
+
+      // Update train's current capacity
+      train.currentCapacity = Array.from(train.seats.values()).filter((seat) => seat === true).length;
+
+      // Save the updated train
+      await train.save();
+
+      // Delete the booking
+      await booking.deleteOne();
+
+      return res.status(200).json({
+        message: "Booking deleted and train updated successfully",
+        train,
+      });
+    }
+
+    // Update the booking details
+    if (price) booking.price = price;
+    if (status) booking.status = status;
+
+    // Reset previously booked seats to available (true)
+    booking.seats.forEach((seat) => {
+      train.seats.set(seat, true);
+    });
+
+    // Set the new seats to unavailable (false)
+    seats.forEach((seat) => {
+      train.seats.set(seat, false);
+    });
+
+    // Update booking seats
+    booking.seats = seats;
+
+    // Add user's first name to train's users array if not already present
+    const firstName = user.firstName.trim();
+    if (!train.users.includes(firstName)) {
+      train.users.push(firstName);
+    }
+
+    // Recalculate train's current capacity
+    train.currentCapacity = Array.from(train.seats.values()).filter((seat) => seat === true).length;
+
+    // Save the updated booking
+    await booking.save();
+
+    // Save the updated train
+    await train.save();
+
+    res.status(200).json({
+      message: "Booking and train updated successfully",
+      booking,
+      train,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "An error occurred while updating the booking" });
+  }
+});
+
+
+
+
 const parseDateFromString = (dateString) => {
     const year = parseInt(dateString.slice(0, 4), 10); // Extract year
     const month = parseInt(dateString.slice(4, 6), 10) - 1; // Extract month (0-based index)

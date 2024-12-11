@@ -18,6 +18,7 @@ import CancelTrain from './components/CancelTrain.js';
 import BookingManagement from './pages/BookingManagement.js';
 import ViewBooking from './components/ViewBooking.js';
 import DeleteBookings from './pages/adminDeleteBooking.js';
+import EditBookings from './pages/EditBookings.js';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/admin/train-management/delete" element={<CancelTrain />} />
         <Route path="/admin/Booking-management/add" element={<ViewBooking />} />
         <Route path="/admin/Booking-management/delete" element={<DeleteBookings></DeleteBookings>} />
+        <Route path="/admin/Booking-management/edit" element={<EditBookings></EditBookings>} />
         <Route path = "/admin/promote-waitlist" element = {<WaitlistPromotion></WaitlistPromotion>}></Route>
         </Routes>
       </Router>
