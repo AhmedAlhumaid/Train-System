@@ -316,5 +316,42 @@ router.get('/IncompletetrainList', async (req, res) => {
   }
 });
 
+router.get("/loadFactor", async (req, res) => {
+  try {
+    const { train, date, from, to } = req.query;
+
+    if (!train || !date || !from || !to) {
+      return res
+        .status(400)
+        .json({ error: "Train Name, date, from, and to are required." });
+    }
+
+    const formattedDate = date.replace(/-/g, '');
+    // Find the train by ID
+    const traiN = await Train.findOne({
+      name:train,
+      from: new RegExp(`^${from}$`, 'i'),
+      to: new RegExp(`^${to}$`, 'i'),
+      date:formattedDate,
+    });
+      if (!traiN) {
+      return res.status(404).json({ error: "Train not found." });
+    }
+
+    const numOfSeate = Array.from(traiN.seats.values()).filter((seat) => seat === false).length
+
+    // Calculate the total seats in the train
+    const totalSeats = 10; 
+
+    // Calculate the load factor
+    const loadFactor = ((numOfSeate / totalSeats) * 100).toFixed(2);
+
+    res.status(200).json({ loadFactor });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "An error occurred while calculating the load factor." });
+  }
+});
+
 module.exports = router;
 

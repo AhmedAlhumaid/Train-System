@@ -59,12 +59,10 @@ const TrainSchema = new mongoose.Schema({
   },
   driver: {
     type: String,
-    required: true,
     trim: true,
   },
   engineer: {
     type: String,
-    required: true,
     trim: true,
   },
   currentCapacity: {
