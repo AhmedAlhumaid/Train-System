@@ -96,7 +96,14 @@ router.delete("/cancelBooking",async(req,res)=>{ //this is for the passenger
     try{
         const decoded = jwt.decode(token, SECRET_KEY);
         const booking = await Booking.findOne({"userId":decoded.userId});
+        const user = await User.findOne({"_id":decoded.userId});
         await Booking.deleteOne({"userId":decoded.userId});
+        const recipientEmail = user.email; 
+        //send email to the recipient 
+        await sendMail(recipientEmail,
+            "Booking Cancellation",
+            "Hi, your booking has been cancelled!"
+        )
         res.status(200).json(booking);
     }
     catch(err){
@@ -124,28 +131,24 @@ router.get("/allBooking", async (req, res) => {
 
   router.post("/addBooking", async (req, res) => {
     const { userId, trainId, seatNumber } = req.body;
-    console.log("here1")
+    
   
     try {
       // Validate input
       if (!userId || !trainId || !seatNumber) {
         return res.status(400).json({ error: "Missing required fields" });
       }
-      console.log("here2")
-
       // Fetch train data
       const train = await Train.findById(trainId);
       if (!train) {
         return res.status(404).json({ error: "Train not found" });
-        console.log("hereERROR")
-
+       
       }
-      console.log("here3")
+      
 
       // Fetch user data
       const user = await User.findById(userId);
       if (!user) {
-        console.log("hereERROR1")
 
         return res.status(404).json({ error: "User not found" });
 
@@ -157,7 +160,6 @@ router.get("/allBooking", async (req, res) => {
   
       // Mark the seat as reserved
       train.seats.set(seatNumber, false);
-      console.log("here4")
 
       // Save updated train data
       await train.save();
@@ -169,7 +171,6 @@ router.get("/allBooking", async (req, res) => {
       });
   
       if (existingBooking) {
-        console.log("hereERROR")
         return res.status(400).json({ error: "Seat already booked" });
       }
   
@@ -189,8 +190,6 @@ router.get("/allBooking", async (req, res) => {
   
       // Save booking to the database
       await newBooking.save();
-      console.log("here5")
-
       res.status(201).json({
         message: "Booking created successfully",
         booking: newBooking,

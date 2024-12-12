@@ -19,6 +19,7 @@ router.post('/register', async (req, res) => {
         password: password,
         type:type,
         phoneNum:phoneNum,
+        miles:0,
       });
     
       // Save the user to the database

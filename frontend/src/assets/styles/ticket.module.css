@@ -43,8 +43,8 @@
   .leftSection {
     flex: 2;
     padding: 40px;
-    border-right: 2px dashed #ccc;
-    background: #f3f3f3;
+    border-right: 2px dashed #8b8b8b;
+    background: #ffffff;
   }
   
   .rightSection {

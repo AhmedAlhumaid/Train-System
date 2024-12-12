@@ -8,6 +8,14 @@
     font-family: "Arial", sans-serif;
     position: relative;
   }
+
+  .vision{
+    position: absolute;
+    left: 83%;
+    top:3%;
+    width:300px;
+    height:200px
+  }
   
   .logoContainer {
     text-align: center; /* Center align the text and logo */

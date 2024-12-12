@@ -2,11 +2,13 @@
 import React from "react";
 import styles from  "../assets/styles/home.module.css"; 
 import logo from "../assets/images/logo.png";
+import vision from "../assets/images/vision.png"
 
 import {Link} from "react-router-dom";
 function Home(){
     return (
         <div className={styles.container}>
+             <img src ={vision} className= {styles.vision}></img>
           {/* Logo Section */}
           <div className={styles.logoContainer}>
             <span className={styles.tagline}>TRAIN TICKET BOOKING</span>
