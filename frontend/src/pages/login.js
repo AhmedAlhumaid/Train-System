@@ -6,6 +6,8 @@ import logo from "../assets/images/logo.png";
 import backIcon from "../assets/images/back-icon.png";
 import userIcon from "../assets/images/user-icon.png";
 import lockIcon from "../assets/images/lock-icon.png";
+import API_BASE_URL from "../config/api";
+
 function Login(){
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -20,12 +22,12 @@ function Login(){
 
     async function handleSubmit() {
       try {
-        const response = await fetch("api/users/login", {
+        const response = await fetch(`${API_BASE_URL}/api/users/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password }), // { email: "example.com", password: "pass" }
+          body: JSON.stringify({ email, password }),
         });
     
         if (!response.ok) {
@@ -39,7 +41,7 @@ function Login(){
     
         // Store the token and user data on the browser for future API requests
         localStorage.setItem("token", data.token);
-        localStorage.setItem("userType", data.type); // Assuming the API response includes user type
+        localStorage.setItem("userType", data.type);
     
         setError("");
     
